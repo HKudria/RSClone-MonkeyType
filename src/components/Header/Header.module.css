@@ -1,0 +1,36 @@
+.header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  margin-top: 20px;
+}
+
+.menuItems {
+  width: 200px;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+}
+
+.keyboard,
+.info,
+.settings,
+.addUser {
+  width: 30px;
+  height: 30px;
+  filter: invert(93%) sepia(6%) saturate(1078%) hue-rotate(8deg) brightness(94%) contrast(89%);
+}
+
+.logo {
+  width: 60px;
+  height: 60px;
+  display: flex;
+  align-items: center;
+}
+
+.title {
+  color: #e3e3e3;
+  font-size: 35px;
+  padding-left: 15px;
+  cursor: pointer;
+}
