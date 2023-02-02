@@ -9,3 +9,41 @@
   justify-content: space-around;
   color: #dfd7af;
 }
+
+.time,
+.words,
+.quote {
+  background-color: #444;
+  border: 2px solid #444;
+  color: #dfd7af;
+}
+
+.time :checked,
+.words :checked,
+.quote :checked {
+  background-color: rgb(57, 55, 55) ;
+}
+
+.restart {
+  width: 200px;
+  display: flex;
+  align-items: center;
+  justify-content: flex-start;
+  color: #444;
+  margin: 0 auto;
+}
+
+.esc {
+  width: 30px;
+  height: 30px;
+  filter: invert(93%) sepia(6%) saturate(1078%) hue-rotate(8deg) brightness(94%) contrast(89%);
+  padding: 0 5px;
+}
+
+.item, select {
+  cursor: pointer;
+}
+
+.item_active {
+  color: #e3e3e3;
+}

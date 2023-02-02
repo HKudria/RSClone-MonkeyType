@@ -2,7 +2,7 @@ import useTypingGame from 'react-typing-game-hook';
 import s from './TextField.module.css';
 
 export const TypingGameDemo = () => {
-  const text = 'The quick brown fox jumps over the lazy dog';
+  const text = 'The quick brown fox jumps over the lazy dogThe quick brown fox jumps over the lazy dogThe quick brown fox jumps over the lazy dogThe quick brown fox jumps over the lazy dogThe quick brown fox jumps over the lazy dog';
   const {
     states: {
       charsState,
