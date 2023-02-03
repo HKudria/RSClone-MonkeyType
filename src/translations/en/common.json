@@ -1,0 +1,9 @@
+{
+  "title" : "Application {{app}}",
+  "login": {
+    "title": "Welcome"
+  },
+  "register": {
+    "title": "Register page"
+  }
+}
