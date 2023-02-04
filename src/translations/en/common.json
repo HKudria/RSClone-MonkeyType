@@ -4,6 +4,18 @@
     "title": "Welcome"
   },
   "register": {
-    "title": "Register page"
+    "title": "Register page",
+    "firstName": "First name",
+    "lastName": "Last name",
+    "password": "Password",
+    "email": "Email",
+    "repeatPassword": "Repeat password"
+  },
+  "errors": {
+    "email": "Email isn't correct",
+    "password": "Password is too short",
+    "lName": "Last name should contain only a-Z and minimum 3 chars",
+    "fName": "First name should contain only a-Z and minimum 3 chars",
+    "passwordNoMuch" : "Password and Repeat password doesn't much, please check it and try again"
   }
 }
