@@ -1,9 +1,10 @@
-import {ChangeEvent, FormEvent, useState} from 'react';
+import React, {ChangeEvent, FormEvent, useState} from 'react';
 import {useTranslation} from 'react-i18next';
 import {IRegisterFormErrors} from '../../Helper/Interfaces';
 import {validateField} from '../../Helper/Validator';
 import {API_URL} from '../../Api/ApiHelper';
 import {IUser} from '../../Api/Interface';
+import {Alert, Box, Button, FormControl, TextField} from '@mui/material';
 
 export const Register = () => {
     const {t} = useTranslation('common');
@@ -17,11 +18,11 @@ export const Register = () => {
         fName: '',
         lName: '',
         password: '',
-        repeatPassword: ''
+        repeatPassword: '',
+        server: ''
     }
 
     const [errors, setErrors] = useState<IRegisterFormErrors>(initialErrors);
-    const [responseError, setResponseError] = useState<string[]>();
 
     const onSubmit = (event: FormEvent) => {
         event.preventDefault()
@@ -37,13 +38,13 @@ export const Register = () => {
             fName: fNameError,
             lName: lNameError,
             password: passwordError,
-            repeatPassword: repeatPasswordError
+            repeatPassword: repeatPasswordError,
+            server: ''
         })
 
         if (!fNameError && !lNameError && !emailError && !passwordError && !repeatPasswordError) {
-            console.log('here')
             const user: IUser = {
-                full_name: fName,
+                first_name: fName,
                 last_name: lName,
                 password,
                 email
@@ -57,7 +58,11 @@ export const Register = () => {
             })
                 .then(response => response.json())
                 .then((data) => {
-                    console.log(data)
+                    if(data.error){
+                        setErrors({...errors, server: data.error})
+                    } else {
+                        console.log('redirect to login')
+                    }
                 }).catch((error) => {
                 console.log(error.message)
             })
@@ -84,33 +89,41 @@ export const Register = () => {
     }
 
     return (
-        <form onSubmit={onSubmit}>
-            <label>
-                {t('register.firstName')}:
-                <input type="text" name="fName" value={fName} onChange={onChangeFName}/>
-                {errors.fName && <p>{t(errors.fName)}</p>}
-            </label>
-            <label>
-                {t('register.lastName')}:
-                <input type="text" name="lName" value={lName} onChange={onChangeLName}/>
-                {errors.lName && <p>{t(errors.lName)}</p>}
-            </label>
-            <label>
-                {t('register.email')}:
-                <input type="email" name="email" value={email} onChange={onChangeEmail}/>
-                {errors.email && <p>{t(errors.email)}</p>}
-            </label>
-            <label>
-                {t('register.password')}:
-                <input type="password" name="password" value={password} onChange={onChangePassword}/>
-                {errors.password && <p>{t(errors.password)}</p>}
-            </label>
-            <label>
-                {t('register.repeatPassword')}:
-                <input type="password" name="repeatPassword" value={repeatPassword} onChange={onChangeRepeatPassword}/>
-                {errors.repeatPassword && <p>{t(errors.repeatPassword)}</p>}
-            </label>
-            <input type="submit" value="Submit"/>
-        </form>
+        <Box sx={{display: 'flex', justifyContent: 'center', background: 'white', width:'fit-content', padding: 2}}>
+        <FormControl>
+            <TextField id="outlined-basic" label={t('register.firstName')}
+                       error={!!errors.fName} variant="outlined" type="text"
+                       name="fName" value={fName} onChange={onChangeFName}
+                       helperText={errors.fName ? t(errors.fName) : ''}
+                       sx={{mb: 2, minWidth: '500px'}}
+            />
+            <TextField id="outlined-basic" label={t('register.lastName')}
+                       error={!!errors.lName} variant="outlined" type="text"
+                       name="fName" value={lName} onChange={onChangeLName}
+                       helperText={errors.lName ? t(errors.lName) : ''}
+                       sx={{mb: 2, minWidth: '500px'}}
+            />
+            <TextField id="outlined-basic" label={t('register.email')}
+                       error={!!errors.email} variant="outlined" type="email"
+                       name="fName" value={email} onChange={onChangeEmail}
+                       helperText={errors.email ? t(errors.email) : ''}
+                       sx={{mb: 2, minWidth: '500px'}}
+            />
+            <TextField id="outlined-basic" label={t('register.password')}
+                       error={!!errors.password} variant="outlined" type="password"
+                       name="fName" value={password} onChange={onChangePassword}
+                       helperText={errors.password ? t(errors.password) : ''}
+                       sx={{mb: 2, minWidth: '500px'}}
+            />
+            <TextField id="outlined-basic" label={t('register.repeatPassword')}
+                       error={!!errors.repeatPassword} variant="outlined" type="password"
+                       name="fName" value={repeatPassword} onChange={onChangeRepeatPassword}
+                       helperText={errors.repeatPassword ? t(errors.repeatPassword) : ''}
+                       sx={{mb: 2, minWidth: '500px'}}
+            />
+            {errors.server && <Alert severity="error">{t(errors.server)}</Alert>}
+            <Button variant="contained" onClick={onSubmit}>{t('register.button')}</Button>
+        </FormControl>
+        </Box>
     );
 }

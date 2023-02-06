@@ -3,5 +3,6 @@ export interface IRegisterFormErrors {
     lName: string
     email: string
     password: string
-    repeatPassword: string
+    repeatPassword: string,
+    server: string
 }
