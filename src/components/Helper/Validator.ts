@@ -8,7 +8,6 @@ export const validateField = (fieldName: string, value: string) => {
             break;
         case 'password':
             isValid = value.length >= 6;
-            console.log(value)
             message = isValid ? '': 'errors.password';
             break;
         case 'fName':

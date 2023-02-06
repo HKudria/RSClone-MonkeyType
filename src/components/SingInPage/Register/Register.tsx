@@ -1,4 +1,4 @@
-import React, {ChangeEvent, FormEvent, useState} from 'react';
+import {ChangeEvent, useState} from 'react';
 import {useTranslation} from 'react-i18next';
 import {IRegisterFormErrors} from '../../Helper/Interfaces';
 import {validateField} from '../../Helper/Validator';
@@ -6,7 +6,11 @@ import {API_URL} from '../../Api/ApiHelper';
 import {IUser} from '../../Api/Interface';
 import {Alert, Box, Button, FormControl, TextField} from '@mui/material';
 
-export const Register = () => {
+interface IRegisterProps {
+    toLogin: () => void
+}
+
+export const Register = ({toLogin}: IRegisterProps) => {
     const {t} = useTranslation('common');
     const [fName, setFName] = useState('');
     const [lName, setLName] = useState('');
@@ -24,9 +28,7 @@ export const Register = () => {
 
     const [errors, setErrors] = useState<IRegisterFormErrors>(initialErrors);
 
-    const onSubmit = (event: FormEvent) => {
-        event.preventDefault()
-
+    const onSubmit = () => {
         const emailError = validateField('email', email)
         const fNameError = validateField('fName', fName)
         const lNameError = validateField('lName', lName)
@@ -58,10 +60,10 @@ export const Register = () => {
             })
                 .then(response => response.json())
                 .then((data) => {
-                    if(data.error){
+                    if (data.error) {
                         setErrors({...errors, server: data.error})
                     } else {
-                        console.log('redirect to login')
+                        toLogin()
                     }
                 }).catch((error) => {
                 console.log(error.message)
@@ -89,41 +91,50 @@ export const Register = () => {
     }
 
     return (
-        <Box sx={{display: 'flex', justifyContent: 'center', background: 'white', width:'fit-content', padding: 2}}>
-        <FormControl>
-            <TextField id="outlined-basic" label={t('register.firstName')}
-                       error={!!errors.fName} variant="outlined" type="text"
-                       name="fName" value={fName} onChange={onChangeFName}
-                       helperText={errors.fName ? t(errors.fName) : ''}
-                       sx={{mb: 2, minWidth: '500px'}}
-            />
-            <TextField id="outlined-basic" label={t('register.lastName')}
-                       error={!!errors.lName} variant="outlined" type="text"
-                       name="fName" value={lName} onChange={onChangeLName}
-                       helperText={errors.lName ? t(errors.lName) : ''}
-                       sx={{mb: 2, minWidth: '500px'}}
-            />
-            <TextField id="outlined-basic" label={t('register.email')}
-                       error={!!errors.email} variant="outlined" type="email"
-                       name="fName" value={email} onChange={onChangeEmail}
-                       helperText={errors.email ? t(errors.email) : ''}
-                       sx={{mb: 2, minWidth: '500px'}}
-            />
-            <TextField id="outlined-basic" label={t('register.password')}
-                       error={!!errors.password} variant="outlined" type="password"
-                       name="fName" value={password} onChange={onChangePassword}
-                       helperText={errors.password ? t(errors.password) : ''}
-                       sx={{mb: 2, minWidth: '500px'}}
-            />
-            <TextField id="outlined-basic" label={t('register.repeatPassword')}
-                       error={!!errors.repeatPassword} variant="outlined" type="password"
-                       name="fName" value={repeatPassword} onChange={onChangeRepeatPassword}
-                       helperText={errors.repeatPassword ? t(errors.repeatPassword) : ''}
-                       sx={{mb: 2, minWidth: '500px'}}
-            />
-            {errors.server && <Alert severity="error">{t(errors.server)}</Alert>}
-            <Button variant="contained" onClick={onSubmit}>{t('register.button')}</Button>
-        </FormControl>
+        <Box sx={{
+            display: 'flex',
+            justifyContent: 'center',
+            background: 'white',
+            width: 'fit-content',
+            padding: 2,
+            flexDirection: 'column',
+            borderRadius: '25px'
+        }}>
+            <h1>{t('register.title')}</h1>
+            <FormControl>
+                <TextField id="outlined-basic" label={t('register.firstName')}
+                           error={!!errors.fName} variant="outlined" type="text"
+                           name="fName" value={fName} onChange={onChangeFName}
+                           helperText={errors.fName ? t(errors.fName) : ''}
+                           sx={{mb: 2, minWidth: '500px'}}
+                />
+                <TextField id="outlined-basic" label={t('register.lastName')}
+                           error={!!errors.lName} variant="outlined" type="text"
+                           name="fName" value={lName} onChange={onChangeLName}
+                           helperText={errors.lName ? t(errors.lName) : ''}
+                           sx={{mb: 2, minWidth: '500px'}}
+                />
+                <TextField id="outlined-basic" label={t('register.email')}
+                           error={!!errors.email} variant="outlined" type="email"
+                           name="fName" value={email} onChange={onChangeEmail}
+                           helperText={errors.email ? t(errors.email) : ''}
+                           sx={{mb: 2, minWidth: '500px'}}
+                />
+                <TextField id="outlined-basic" label={t('register.password')}
+                           error={!!errors.password} variant="outlined" type="password"
+                           name="fName" value={password} onChange={onChangePassword}
+                           helperText={errors.password ? t(errors.password) : ''}
+                           sx={{mb: 2, minWidth: '500px'}}
+                />
+                <TextField id="outlined-basic" label={t('register.repeatPassword')}
+                           error={!!errors.repeatPassword} variant="outlined" type="password"
+                           name="fName" value={repeatPassword} onChange={onChangeRepeatPassword}
+                           helperText={errors.repeatPassword ? t(errors.repeatPassword) : ''}
+                           sx={{mb: 2, minWidth: '500px'}}
+                />
+                {errors.server && <Alert severity="error">{t(errors.server)}</Alert>}
+                <Button variant="contained" onClick={onSubmit}>{t('register.button')}</Button>
+            </FormControl>
         </Box>
     );
 }
