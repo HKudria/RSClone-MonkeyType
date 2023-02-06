@@ -8,6 +8,8 @@ export interface IState {
 
 export const MainPage: React.FC = () => {
   const [selectAmountOfWords, setSelectAmountOfWords] = useState('');
+  const [selectQuote, setSelectQuote] = useState('');
+  const [selectTime, setSelectTime] = useState('');
    
   const [time, setTime] = useState<string>('No time');
   const [words, setAmountOfWords] = useState<string>('Not words');
@@ -19,15 +21,19 @@ export const MainPage: React.FC = () => {
 
   const changeTime = (event: ChangeEvent<HTMLSelectElement>) => {
     setTime(event.target.value);
+    setSelectTime(event.target.value);
   };
 
   const changeAmountOfWords = (event: ChangeEvent<HTMLSelectElement>) => {
     setAmountOfWords(event.target.value);
+    setQuote('no-quote');
     setSelectAmountOfWords(event.target.value);
   };
 
   const changeQuote = (event: ChangeEvent<HTMLSelectElement>) => {
     setQuote(event.target.value);
+    setAmountOfWords('no-words');
+    setSelectQuote(event.target.value);
   };
 
   const changeActiveClassPunctuation = () => {
@@ -51,10 +57,10 @@ export const MainPage: React.FC = () => {
          >numbers</div>
         <select value={time} onChange={changeTime} className={s.time}>
           <option value="no-time">No time</option>
-          <option value="fifteen_sec">15s</option>
-          <option value="thirty_sec">30s</option>
-          <option value="sixty_sec">60s</option>
-          <option value="two_minutes">120s</option>
+          <option value="15">15s</option>
+          <option value="30">30s</option>
+          <option value="60">60s</option>
+          <option value="120">120s</option>
         </select>
         <select value={words} onChange={changeAmountOfWords} className={s.words}>
           <option value="no-words">Not words</option>
@@ -64,13 +70,18 @@ export const MainPage: React.FC = () => {
         </select>
         <select value={quote} onChange={changeQuote} className={s.quote}>
           <option value="no-quote">Not quote</option>
-          <option value="short_quote">Short quote</option>
-          <option value="medium_quote">Medium quote</option>
-          <option value="long_quote">Long quote</option>
+          <option value="short">Short quote</option>
+          <option value="medium">Medium quote</option>
+          <option value="long">Long quote</option>
         </select>
         <div className={s.item}>change</div>
       </div>
-        <TypingGameDemo amountOfWords={selectAmountOfWords} />
+        <TypingGameDemo
+          amountOfWords={selectAmountOfWords}
+          quote={selectQuote}
+          isActiveNumber={isActiveNumber}
+          selectTime={selectTime}
+          />
         <div className={s.restart}>
           <img src={ESC} alt='esc' className={s.esc}/>
           <p> - restart test </p>
