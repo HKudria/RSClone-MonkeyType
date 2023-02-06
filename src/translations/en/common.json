@@ -1,0 +1,42 @@
+{
+  "title": "Welcome to {{app}}",
+  "login": {
+    "title": "Login form: ",
+    "button": "Sing In",
+    "success": "You has been successfully login"
+  },
+  "register": {
+    "title": "Register form: ",
+    "firstName": "First name",
+    "lastName": "Last name",
+    "password": "Password",
+    "repeatPassword": "Repeat password",
+    "email": "Email",
+    "button": "Register",
+    "success": "Account has been successfully registered"
+  },
+  "logout": {
+    "success" : "You has been successfully logout"
+  },
+  "errors": {
+    "email": "Email isn't correct",
+    "password": "Password is too short",
+    "lName": "Last name should contain only a-Z and minimum 3 chars",
+    "fName": "First name should contain only a-Z and minimum 3 chars",
+    "passwordNoMuch": "Password and Repeat password doesn't much, please check it and try again",
+    "invalidCredential": "Email or password isn't correct",
+    "allFieldRequired": "All fields should be filled",
+    "userExist": "User with this email isn't exist. Please login in",
+    "emptyToken": "A token is required for authentication",
+    "invalidToken": "Invalid token"
+  },
+  "button": {
+    "login": "Login",
+    "register": "Register",
+    "logout": "Logout"
+  },
+  "user": {
+    "title": "User profile",
+    "register": "Register"
+  }
+}
