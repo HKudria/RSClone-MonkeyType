@@ -23,14 +23,14 @@ export const Header = () => {
     return (
         <header className={s.header}>
             <div className={s.logo}>
-                <button onClick={() => changeLanguage('ru')}>ru</button>
-                <button onClick={() => changeLanguage('en')}>en</button>
                 <NavLink to={'/'}>
                     <img className={s.logo} alt='logo' src={logo}></img>
                 </NavLink>
-                <h1 className={s.title}>{t('title', {app:'MonkeyType'})}</h1>
+                <span className={s.title}>{t('title', {app:'MonkeyType'})}</span>
             </div>
             <div className={s.menuItems}>
+                <button onClick={() => changeLanguage('ru')}>ru</button>
+                <button onClick={() => changeLanguage('en')}>en</button>
                 <NavLink to={'/'}>
                     <img className={s.keyboard} alt='keyboard' src={keyboard}></img>
                 </NavLink>

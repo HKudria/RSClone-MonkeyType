@@ -26,7 +26,7 @@
     "passwordNoMuch": "Password and Repeat password doesn't much, please check it and try again",
     "invalidCredential": "Email or password isn't correct",
     "allFieldRequired": "All fields should be filled",
-    "userExist": "User with this email exist. Please login in",
+    "userExist": "User with this email isn't exist. Please login in",
     "emptyToken": "A token is required for authentication",
     "invalidToken": "Invalid token"
   },
