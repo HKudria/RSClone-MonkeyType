@@ -1,16 +1,22 @@
+import { FC, useEffect, useState } from 'react';
 import useTypingGame from 'react-typing-game-hook';
 import { faker } from '@faker-js/faker';
+
+import { WinStatistic } from './WinStatistic/WinStatistic';
 import s from './TextField.module.css';
-import { FC, useEffect, useState } from 'react';
+
 
 export const TypingGameDemo:
  FC<{ amountOfWords: string;
    quote: string;
    isActiveNumber: boolean; 
-   selectTime: string; }> = ({ amountOfWords, quote, isActiveNumber, selectTime } ): JSX.Element => {
+   isActivePunctuation: boolean;
+   selectTime: string; }> = 
+   ({ amountOfWords, quote, isActiveNumber,
+     isActivePunctuation, selectTime } ): JSX.Element => {
   const [text, setText] = useState<string>('');
   const [isWin, setIsWin] = useState<boolean>(false);
-  const [counter, setCounter] = useState<number>();
+  const [counter, setCounter] = useState<number | null>();
   const {
     states: {
       charsState,
@@ -50,6 +56,8 @@ export const TypingGameDemo:
           case '120':
             setCounter(120);
             break;
+          default:
+            setCounter(null);
         }
   }, [selectTime]);
 
@@ -93,12 +101,18 @@ export const TypingGameDemo:
   }, [quote, faker]);
 
   useEffect(() => {
-    if (isActiveNumber) {
-      setText(faker.lorem.words(3) + ' ' + faker.address.buildingNumber() + ' ' + faker.lorem.words(2) + ' ' + faker.address.buildingNumber());
+    if (isActiveNumber && isActivePunctuation) {
+      setText(`${faker.lorem.words(2)}. ${faker.lorem.words(2)}! ${faker.address.buildingNumber()} ${faker.lorem.words(1)}. ${faker.lorem.words(2)}, ${faker.address.buildingNumber()} '${faker.lorem.words(1)}'; ${faker.lorem.words(2)}?`);
+    } else if (isActiveNumber) {
+      setText(faker.lorem.words(3) + ' ' + faker.address.buildingNumber()
+       + ' ' + faker.lorem.words(2) + ' ' + faker.address.buildingNumber()
+       + ' ' + faker.lorem.words(2));
+    } else if (isActivePunctuation) {
+      setText(`${faker.lorem.words(2)}, ${faker.lorem.words(2)}: ${faker.lorem.words(1)}. ${faker.lorem.words(2)}! "${faker.lorem.words(1)}"; ${faker.lorem.words(2)}?`);
     } else {
-      setText(faker.lorem.sentence(3));
+      setText(faker.lorem.sentence(4));
     }
-  }, [isActiveNumber, faker]);
+  }, [isActiveNumber, isActivePunctuation, faker]);
 
   useEffect(() => {
     if (endTime) {
@@ -108,7 +122,7 @@ export const TypingGameDemo:
 
   return (
     <div className={s.wrapper}>
-      <div>{counter}</div>
+      <div className={s.timer}>{counter}</div>
       <div
         className={s.typingTest}
         onKeyDown={(e) => {
@@ -132,7 +146,7 @@ export const TypingGameDemo:
           );
         })}
       </div>
-      {isWin && <div  >you win</div> }
+      {(isWin || counter === 0) && <WinStatistic /> }
       {/* <pre>
         {JSON.stringify(
           {

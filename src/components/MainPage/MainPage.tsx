@@ -1,15 +1,12 @@
-import { ChangeEvent, useEffect, useState } from 'react';
+import { ChangeEvent, FC, useState } from 'react';
 import s from './MainPage.module.css';
 import TypingGameDemo from './TextField/TextField';
 import ESC from '../../assets/image/esc.png';
-export interface IState {
-  amountOfWords: string,
-}
 
-export const MainPage: React.FC = () => {
-  const [selectAmountOfWords, setSelectAmountOfWords] = useState('');
-  const [selectQuote, setSelectQuote] = useState('');
-  const [selectTime, setSelectTime] = useState('');
+export const MainPage: FC = () => {
+  const [selectAmountOfWords, setSelectAmountOfWords] = useState<string>('');
+  const [selectQuote, setSelectQuote] = useState<string>('');
+  const [selectTime, setSelectTime] = useState<string>('');
    
   const [time, setTime] = useState<string>('No time');
   const [words, setAmountOfWords] = useState<string>('Not words');
@@ -55,6 +52,7 @@ export const MainPage: React.FC = () => {
          className={isActiveNumber ? s.item_active : s.item}
          onClick={changeActiveClassNumber}
          >numbers</div>
+         <div className={s.separator}></div>
         <select value={time} onChange={changeTime} className={s.time}>
           <option value="no-time">No time</option>
           <option value="15">15s</option>
@@ -74,12 +72,14 @@ export const MainPage: React.FC = () => {
           <option value="medium">Medium quote</option>
           <option value="long">Long quote</option>
         </select>
+        <div className={s.separator}></div>
         <div className={s.item}>change</div>
       </div>
         <TypingGameDemo
           amountOfWords={selectAmountOfWords}
           quote={selectQuote}
           isActiveNumber={isActiveNumber}
+          isActivePunctuation={isActivePunctuation}
           selectTime={selectTime}
           />
         <div className={s.restart}>
