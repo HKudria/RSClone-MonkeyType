@@ -17,6 +17,7 @@ export const TypingGameDemo:
   const [text, setText] = useState<string>('');
   const [isWin, setIsWin] = useState<boolean>(false);
   const [counter, setCounter] = useState<number | null>();
+  const [time, setTime] = useState<number | null>();
   const {
     states: {
       charsState,
@@ -46,18 +47,23 @@ export const TypingGameDemo:
     switch(selectTime) {
           case '15':
             setCounter(15);
+            setTime(15);
             break;
           case '30':
             setCounter(30);
+            setTime(30);
             break;
           case '60':
             setCounter(60);
+            setTime(60);
             break;
           case '120':
             setCounter(120);
+            setTime(120);
             break;
           default:
             setCounter(null);
+            setTime(null);
         }
   }, [selectTime]);
 
@@ -146,23 +152,34 @@ export const TypingGameDemo:
           );
         })}
       </div>
-      {(isWin || counter === 0) && <WinStatistic /> }
-      {/* <pre>
+      {(isWin || counter === 0) &&
+       <WinStatistic
+        startTime={startTime}
+        endTime={endTime}
+        length={length}
+        errorChar={errorChar}
+        correctChar={correctChar}
+        text={text}
+        currIndex={currIndex}
+        time={time}
+         /> }
+      <pre>
         {JSON.stringify(
           {
-            startTime,
-            endTime,
+            // charsState,
             length,
             currIndex,
             currChar,
             correctChar,
             errorChar,
-            phase
+            phase,
+            startTime,
+            endTime
           },
           null,
           2
         )}
-      </pre> */}
+      </pre>
     </div>
   );
 };
