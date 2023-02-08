@@ -163,7 +163,7 @@ export const TypingGameDemo:
         currIndex={currIndex}
         time={time}
          /> }
-      <pre>
+      {/* <pre>
         {JSON.stringify(
           {
             // charsState,
@@ -179,7 +179,7 @@ export const TypingGameDemo:
           null,
           2
         )}
-      </pre>
+      </pre> */}
     </div>
   );
 };
