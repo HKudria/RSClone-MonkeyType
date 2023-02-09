@@ -33,4 +33,5 @@
   font-size: 35px;
   padding-left: 15px;
   cursor: pointer;
+  min-width: 400px;
 }
