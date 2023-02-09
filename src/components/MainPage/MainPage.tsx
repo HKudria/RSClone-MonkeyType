@@ -21,6 +21,9 @@ export const MainPage: FC = () => {
   const [isInstallWordsYourself, setIsInstallWordsYourself] = useState<boolean>(false);
   const [wordsYourself, setWordsYourself] = useState<string>('3');
 
+  const [isInstallTextYourself, setIsInstallTextYourself] = useState<boolean>(false);
+  const [textYourself, setTextYourself] = useState<string>('Hey');
+
 
   const changeTime = (event: ChangeEvent<HTMLSelectElement>) => {
     if (event.target.value === 'install_yourself_time') {
@@ -75,12 +78,25 @@ export const MainPage: FC = () => {
     setWordsYourself(currentSetWords);
   }
 
+  const handleInputText = (event: ChangeEvent<HTMLTextAreaElement>) => {
+    const currentSetText = event.target.value;
+    setTextYourself(currentSetText);
+  }
+
   const handleBtnSetTime = () => {
     setIsInstallTimeYourself(false);
   }
 
   const handleBtnSetWords = () => {
     setIsInstallWordsYourself(false);
+  }
+
+  const handleBtnSetText = () => {
+    setIsInstallTextYourself(false);
+  }
+
+  const handleChangeTextBtn = () => {
+    setIsInstallTextYourself(true);
   }
 
   return (
@@ -117,7 +133,7 @@ export const MainPage: FC = () => {
           <option value="long">Long quote</option>
         </select>
         <div className={s.separator}></div>
-        <div className={s.item}>change</div>
+        <div className={s.item} onClick={handleChangeTextBtn}>change</div>
       </div>
       {isInstallTimeYourself && 
       <div className={s.installTime}>
@@ -139,6 +155,19 @@ export const MainPage: FC = () => {
           <button onClick={handleBtnSetWords} className={s.btnWords}>Set words</button>
         </div>
       </div>}
+      {isInstallTextYourself && 
+      <div className={s.installText}>
+        <div className={s.installTextInput}>
+          <p className={s.textTitle}>Write your own text</p>
+          <textarea
+           name="text"
+           onChange={handleInputText} 
+           value={textYourself} 
+           className={s.inputText}></textarea>  
+          <button onClick={handleBtnSetText} className={s.btnText}>Set text</button>
+        </div>
+      </div>}
+      
         <TypingGameDemo
           amountOfWords={selectAmountOfWords}
           quote={selectQuote}
@@ -148,6 +177,8 @@ export const MainPage: FC = () => {
           timeYourself={timeYourself}
           isInstallTimeYourself={isInstallTimeYourself}
           wordsYourself={wordsYourself}
+          textYourself={textYourself}
+          isInstallTextYourself={isInstallTextYourself}
           />
         <div className={s.restart}>
           <img src={ESC} alt='esc' className={s.esc}/>

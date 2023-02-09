@@ -5,7 +5,6 @@ import { faker } from '@faker-js/faker';
 import { WinStatistic } from './WinStatistic/WinStatistic';
 import s from './TextField.module.css';
 
-
 export const TypingGameDemo:
  FC<{ amountOfWords: string;
    quote: string;
@@ -14,10 +13,13 @@ export const TypingGameDemo:
    selectTime: string;
    timeYourself: string;
    isInstallTimeYourself: boolean;
-   wordsYourself: string; }> = 
+   wordsYourself: string;
+   textYourself: string;
+   isInstallTextYourself: boolean; }> = 
    ({ amountOfWords, quote, isActiveNumber,
      isActivePunctuation, selectTime, timeYourself,
-     isInstallTimeYourself, wordsYourself } ): JSX.Element => {
+     isInstallTimeYourself, wordsYourself, textYourself,
+     isInstallTextYourself } ): JSX.Element => {
   const [text, setText] = useState<string>('');
   const [isWin, setIsWin] = useState<boolean>(false);
   const [counter, setCounter] = useState<number | null>();
@@ -135,7 +137,13 @@ export const TypingGameDemo:
     if (endTime) {
       setIsWin(true);
     }
-  }, [endTime])
+  }, [endTime]);
+
+  useEffect(() => {
+    if (isInstallTextYourself) {
+      setText(textYourself);
+    }
+  }, [isInstallTextYourself, textYourself]);
 
   return (
     <div className={s.wrapper}>
