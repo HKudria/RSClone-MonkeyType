@@ -4,25 +4,25 @@ import TypingGameDemo from './TextField/TextField';
 import ESC from '../../assets/image/esc.png';
 
 export const MainPage: FC = () => {
-  const [selectAmountOfWords, setSelectAmountOfWords] = useState<string>('');
-  const [selectQuote, setSelectQuote] = useState<string>('');
-  const [selectTime, setSelectTime] = useState<string>('');
+  const [selectAmountOfWords, setSelectAmountOfWords] = useState('');
+  const [selectQuote, setSelectQuote] = useState('');
+  const [selectTime, setSelectTime] = useState('');
    
-  const [time, setTime] = useState<string>('No time');
-  const [words, setAmountOfWords] = useState<string>('Not words');
-  const [quote, setQuote] = useState<string>('Not quote');
+  const [time, setTime] = useState('No time');
+  const [words, setAmountOfWords] = useState('Not words');
+  const [quote, setQuote] = useState('Not quote');
 
-  const [isActivePunctuation, setIsActivePunctuation] = useState<boolean>(false);
-  const [isActiveNumber, setIsActiveNumber] = useState<boolean>(false);
+  const [isActivePunctuation, setIsActivePunctuation] = useState(false);
+  const [isActiveNumber, setIsActiveNumber] = useState(false);
 
-  const [isInstallTimeYourself, setIsInstallTimeYourself] = useState<boolean>(false);
-  const [timeYourself, setTimeYourself] = useState<string>('10');
+  const [isInstallTimeYourself, setIsInstallTimeYourself] = useState(false);
+  const [timeYourself, setTimeYourself] = useState('10');
 
-  const [isInstallWordsYourself, setIsInstallWordsYourself] = useState<boolean>(false);
-  const [wordsYourself, setWordsYourself] = useState<string>('3');
+  const [isInstallWordsYourself, setIsInstallWordsYourself] = useState(false);
+  const [wordsYourself, setWordsYourself] = useState('3');
 
-  const [isInstallTextYourself, setIsInstallTextYourself] = useState<boolean>(false);
-  const [textYourself, setTextYourself] = useState<string>('Hey');
+  const [isInstallTextYourself, setIsInstallTextYourself] = useState(false);
+  const [textYourself, setTextYourself] = useState('Hey');
 
 
   const changeTime = (event: ChangeEvent<HTMLSelectElement>) => {

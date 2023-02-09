@@ -15,19 +15,6 @@
   
 }
 
-/* .closeContainer {
-  position: absolute;
-  top: 20px;
-  right: 20px;
-}
-
-.closeItem {
-  cursor: pointer;
-  width: 35px;
-  height: 35px;
-  filter: invert(93%) sepia(6%) saturate(1078%) hue-rotate(8deg) brightness(94%) contrast(89%);
-} */
-
 .wrapper_not_active {
   display: none;
 }
