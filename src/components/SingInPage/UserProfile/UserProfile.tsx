@@ -16,7 +16,7 @@ export const UserProfile = ({toSingPage}: IUserProfileProps) => {
 
     const parseUserData = () => {
         fetch(`${API_URL}/userData`, {
-            method: 'POST',
+            method: 'GET',
             headers: {
                 'Content-Type': 'application/json',
                 'x-access-token': cookies.access_token
