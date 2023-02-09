@@ -20,8 +20,8 @@ export const TypingGameDemo:
      isActivePunctuation, selectTime, timeYourself,
      isInstallTimeYourself, wordsYourself, textYourself,
      isInstallTextYourself } ): JSX.Element => {
-  const [text, setText] = useState<string>('');
-  const [isWin, setIsWin] = useState<boolean>(false);
+  const [text, setText] = useState('');
+  const [isWin, setIsWin] = useState(false);
   const [counter, setCounter] = useState<number | null>();
   const [time, setTime] = useState<number | null>();
   const {
@@ -182,23 +182,6 @@ export const TypingGameDemo:
         currIndex={currIndex}
         time={time}
          /> }
-      {/* <pre>
-        {JSON.stringify(
-          {
-            // charsState,
-            length,
-            currIndex,
-            currChar,
-            correctChar,
-            errorChar,
-            phase,
-            startTime,
-            endTime
-          },
-          null,
-          2
-        )}
-      </pre> */}
     </div>
   );
 };
