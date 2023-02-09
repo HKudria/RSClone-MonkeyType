@@ -15,8 +15,14 @@ export const MainPage: FC = () => {
   const [isActivePunctuation, setIsActivePunctuation] = useState<boolean>(false);
   const [isActiveNumber, setIsActiveNumber] = useState<boolean>(false);
 
+  const [isInstallTimeYourself, setIsInstallTimeYourself] = useState<boolean>(false);
+  const [timeYourself, setTimeYourself] = useState<string>('10');
+
 
   const changeTime = (event: ChangeEvent<HTMLSelectElement>) => {
+    if (event.target.value === 'install_yourself') {
+      setIsInstallTimeYourself(true);
+    }
     setTime(event.target.value);
     setSelectTime(event.target.value);
   };
@@ -25,20 +31,41 @@ export const MainPage: FC = () => {
     setAmountOfWords(event.target.value);
     setQuote('no-quote');
     setSelectAmountOfWords(event.target.value);
+    setIsActivePunctuation(false);
+    setIsActiveNumber(false);
   };
 
   const changeQuote = (event: ChangeEvent<HTMLSelectElement>) => {
     setQuote(event.target.value);
     setAmountOfWords('no-words');
     setSelectQuote(event.target.value);
+    setIsActivePunctuation(false);
+    setIsActiveNumber(false)
   };
 
   const changeActiveClassPunctuation = () => {
     setIsActivePunctuation(current => !current);
+    if (isActivePunctuation) {
+      setQuote('no-quote');
+      setAmountOfWords('no-words');
+    }
   }
 
   const changeActiveClassNumber = () => {
     setIsActiveNumber(current => !current);
+    if (isActiveNumber) {
+      setQuote('no-quote');
+      setAmountOfWords('no-words');
+    }
+  }
+
+  const handleInputTime = (event: ChangeEvent<HTMLInputElement>) => {
+    const currentSetTime = event.target.value.replace(/\D/g,'');
+    setTimeYourself(currentSetTime);
+  }
+
+  const handleBtnSetTime = () => {
+    setIsInstallTimeYourself(false);
   }
 
   return (
@@ -59,6 +86,7 @@ export const MainPage: FC = () => {
           <option value="30">30s</option>
           <option value="60">60s</option>
           <option value="120">120s</option>
+          <option value="install_yourself">Install yourself</option>
         </select>
         <select value={words} onChange={changeAmountOfWords} className={s.words}>
           <option value="no-words">Not words</option>
@@ -75,12 +103,24 @@ export const MainPage: FC = () => {
         <div className={s.separator}></div>
         <div className={s.item}>change</div>
       </div>
+      {isInstallTimeYourself && 
+      <div className={s.installTime}>
+        <div className={s.installTimeInput}>
+          <input type='text'
+           onInput={handleInputTime} 
+           value={timeYourself} 
+           className={s.inputTime}></input>  
+          <button onClick={handleBtnSetTime} className={s.btnTime}>Set time</button>
+        </div>
+      </div>}
         <TypingGameDemo
           amountOfWords={selectAmountOfWords}
           quote={selectQuote}
           isActiveNumber={isActiveNumber}
           isActivePunctuation={isActivePunctuation}
           selectTime={selectTime}
+          timeYourself={timeYourself}
+          isInstallTimeYourself={isInstallTimeYourself}
           />
         <div className={s.restart}>
           <img src={ESC} alt='esc' className={s.esc}/>

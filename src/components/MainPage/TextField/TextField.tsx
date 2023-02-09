@@ -11,9 +11,12 @@ export const TypingGameDemo:
    quote: string;
    isActiveNumber: boolean; 
    isActivePunctuation: boolean;
-   selectTime: string; }> = 
+   selectTime: string;
+   timeYourself: string;
+   isInstallTimeYourself: boolean; }> = 
    ({ amountOfWords, quote, isActiveNumber,
-     isActivePunctuation, selectTime } ): JSX.Element => {
+     isActivePunctuation, selectTime, timeYourself,
+     isInstallTimeYourself } ): JSX.Element => {
   const [text, setText] = useState<string>('');
   const [isWin, setIsWin] = useState<boolean>(false);
   const [counter, setCounter] = useState<number | null>();
@@ -61,18 +64,22 @@ export const TypingGameDemo:
             setCounter(120);
             setTime(120);
             break;
+          case 'install_yourself':
+            setCounter(+timeYourself);
+            setTime(+timeYourself);
+            break;
           default:
             setCounter(null);
             setTime(null);
         }
-  }, [selectTime]);
+  }, [selectTime, timeYourself]);
 
   useEffect(() => {
-    if (counter) {
+    if (counter && startTime) {
       const timer = setInterval(() => setCounter(counter - 1), 1000);
       return () => clearInterval(timer);
     }
-  }, [counter]);
+  }, [counter, startTime]);
 
   useEffect(() => {
     switch (amountOfWords) {
@@ -152,7 +159,7 @@ export const TypingGameDemo:
           );
         })}
       </div>
-      {(isWin || counter === 0) &&
+      {((isWin || counter === 0) && !isInstallTimeYourself) &&
        <WinStatistic
         startTime={startTime}
         endTime={endTime}
