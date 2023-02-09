@@ -13,10 +13,11 @@ export const TypingGameDemo:
    isActivePunctuation: boolean;
    selectTime: string;
    timeYourself: string;
-   isInstallTimeYourself: boolean; }> = 
+   isInstallTimeYourself: boolean;
+   wordsYourself: string; }> = 
    ({ amountOfWords, quote, isActiveNumber,
      isActivePunctuation, selectTime, timeYourself,
-     isInstallTimeYourself } ): JSX.Element => {
+     isInstallTimeYourself, wordsYourself } ): JSX.Element => {
   const [text, setText] = useState<string>('');
   const [isWin, setIsWin] = useState<boolean>(false);
   const [counter, setCounter] = useState<number | null>();
@@ -64,7 +65,7 @@ export const TypingGameDemo:
             setCounter(120);
             setTime(120);
             break;
-          case 'install_yourself':
+          case 'install_yourself_time':
             setCounter(+timeYourself);
             setTime(+timeYourself);
             break;
@@ -91,11 +92,14 @@ export const TypingGameDemo:
         break;
       case '50':
         setText(faker.lorem.words(50));
-        break;  
+        break;
+      case 'install_yourself_words':
+        setText(faker.lorem.words(+wordsYourself));
+        break;
       default:
         setText(faker.lorem.sentence());
     }
-  }, [amountOfWords, faker]);
+  }, [amountOfWords, faker, wordsYourself]);
 
   useEffect(() => {
     switch (quote) {

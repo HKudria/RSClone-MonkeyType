@@ -18,9 +18,12 @@ export const MainPage: FC = () => {
   const [isInstallTimeYourself, setIsInstallTimeYourself] = useState<boolean>(false);
   const [timeYourself, setTimeYourself] = useState<string>('10');
 
+  const [isInstallWordsYourself, setIsInstallWordsYourself] = useState<boolean>(false);
+  const [wordsYourself, setWordsYourself] = useState<string>('3');
+
 
   const changeTime = (event: ChangeEvent<HTMLSelectElement>) => {
-    if (event.target.value === 'install_yourself') {
+    if (event.target.value === 'install_yourself_time') {
       setIsInstallTimeYourself(true);
     }
     setTime(event.target.value);
@@ -28,6 +31,9 @@ export const MainPage: FC = () => {
   };
 
   const changeAmountOfWords = (event: ChangeEvent<HTMLSelectElement>) => {
+    if (event.target.value === 'install_yourself_words') {
+      setIsInstallWordsYourself(true);
+    }
     setAmountOfWords(event.target.value);
     setQuote('no-quote');
     setSelectAmountOfWords(event.target.value);
@@ -64,8 +70,17 @@ export const MainPage: FC = () => {
     setTimeYourself(currentSetTime);
   }
 
+  const handleInputWords = (event: ChangeEvent<HTMLInputElement>) => {
+    const currentSetWords = event.target.value.replace(/\D/g,'').substr(0,2);
+    setWordsYourself(currentSetWords);
+  }
+
   const handleBtnSetTime = () => {
     setIsInstallTimeYourself(false);
+  }
+
+  const handleBtnSetWords = () => {
+    setIsInstallWordsYourself(false);
   }
 
   return (
@@ -86,13 +101,14 @@ export const MainPage: FC = () => {
           <option value="30">30s</option>
           <option value="60">60s</option>
           <option value="120">120s</option>
-          <option value="install_yourself">Install yourself</option>
+          <option value="install_yourself_time">Install yourself</option>
         </select>
         <select value={words} onChange={changeAmountOfWords} className={s.words}>
           <option value="no-words">Not words</option>
           <option value="10">10 words</option>
           <option value="25">25 words</option>
           <option value="50">50 words</option>
+          <option value="install_yourself_words">Install yourself</option>
         </select>
         <select value={quote} onChange={changeQuote} className={s.quote}>
           <option value="no-quote">Not quote</option>
@@ -113,6 +129,16 @@ export const MainPage: FC = () => {
           <button onClick={handleBtnSetTime} className={s.btnTime}>Set time</button>
         </div>
       </div>}
+      {isInstallWordsYourself && 
+      <div className={s.installWords}>
+        <div className={s.installWordsInput}>
+          <input type='text'
+           onInput={handleInputWords} 
+           value={wordsYourself} 
+           className={s.inputWords}></input>  
+          <button onClick={handleBtnSetWords} className={s.btnWords}>Set words</button>
+        </div>
+      </div>}
         <TypingGameDemo
           amountOfWords={selectAmountOfWords}
           quote={selectQuote}
@@ -121,6 +147,7 @@ export const MainPage: FC = () => {
           selectTime={selectTime}
           timeYourself={timeYourself}
           isInstallTimeYourself={isInstallTimeYourself}
+          wordsYourself={wordsYourself}
           />
         <div className={s.restart}>
           <img src={ESC} alt='esc' className={s.esc}/>
