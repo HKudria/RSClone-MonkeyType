@@ -4,6 +4,7 @@ import { faker } from '@faker-js/faker';
 
 import { WinStatistic } from './WinStatistic/WinStatistic';
 import s from './TextField.module.css';
+import { KeyboardHelper } from './Keyboard/Keyboard';
 
 export const TypingGameDemo:
  FC<{ amountOfWords: string;
@@ -182,6 +183,26 @@ export const TypingGameDemo:
         currIndex={currIndex}
         time={time}
          /> }
+         <pre>
+        {JSON.stringify(
+          {
+            // charsState,
+            length,
+            currIndex,
+            currChar,
+            correctChar,
+            errorChar,
+            phase,
+            startTime,
+            endTime
+          },
+          null,
+          2
+        )}
+      </pre>
+         <KeyboardHelper currChar={currChar}
+         text={text}
+         currIndex={currIndex} />
     </div>
   );
 };
