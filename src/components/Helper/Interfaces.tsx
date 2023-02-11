@@ -6,3 +6,8 @@ export interface IRegisterFormErrors {
     repeatPassword?: string,
     server: string
 }
+
+export interface IBanner {
+    message: string;
+    type: "success" | "error";
+}

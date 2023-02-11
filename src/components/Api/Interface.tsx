@@ -9,14 +9,16 @@ export type ILogin = Pick<IUser, 'email' | 'password'>
 
 export interface IUserData{
     "_id": string;
-    "email": string;
-    "result_time": number;
-    "correct_input": number;
-    "incorrect_input": number;
-    "percent": number;
-    "text": string;
-    "timer": number;
-    "timer_percent": number;
+    startTime: number | null;
+    endTime: number | null;
+    length: number;
+    errorChar: number;
+    correctChar: number;
+    text: string;
+    currIndex: number;
+    time: number | null | undefined;
     "fullName": string;
     "date": string;
 }
+
+export type IUserSendData = Omit<IUserData, '_id'|'fullName'|'date'>
