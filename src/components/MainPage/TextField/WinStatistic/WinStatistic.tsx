@@ -1,7 +1,13 @@
-import {useState} from 'react';
+import React, {useEffect, useState} from 'react';
 
 import s from './WinStatistic.module.css';
 import {MyResponsivePie} from './Diagram/Diagram';
+import {useCookies} from 'react-cookie';
+import {API_URL} from '../../../Api/ApiHelper';
+import {IUserSendData} from '../../../Api/Interface';
+import {Alert} from '@mui/material';
+import {IBanner} from '../../../Helper/Interfaces';
+import {useTranslation} from 'react-i18next';
 
 interface IWinStatisticProps {
     startTime: number | null;
@@ -22,12 +28,57 @@ export const WinStatistic = ({
                              }: IWinStatisticProps) => {
 
     const [isActiveCloseItem, setIsActiveCloseItem] = useState<boolean>(true);
+    const [cookies, setCookie] = useCookies(['access_token']);
+    const initBanner: IBanner = {message: '', type: "success"}
+    const [bannerMessage, setBannerMessage] = useState(initBanner);
+    const {t} = useTranslation('common');
 
     const countCorrectChar = () => {
         if (length && errorChar) {
             return length - errorChar;
         } else return length;
     }
+
+    useEffect(() => {
+        if (!isUserPage && localStorage.getItem('user') && cookies.access_token) {
+            const userData: IUserSendData = {
+                text,
+                length,
+                errorChar,
+                correctChar,
+                currIndex,
+                time,
+                endTime,
+                startTime,
+            }
+            fetch(`${API_URL}/saveUserResult`, {
+                method: 'POST',
+                headers: {
+                    'Content-Type': 'application/json',
+                    'x-access-token': cookies.access_token
+                },
+                body: JSON.stringify(userData)
+            })
+                .then(response => response.json())
+                .then((data) => {
+                    if (data.error) {
+                        setBannerMessage({
+                            message: data.error,
+                            type: 'error'
+                        })
+                        setTimeout(() => setBannerMessage(initBanner), 5000)
+                    } else {
+                        setBannerMessage({
+                            message: 'game.saved',
+                            type: 'success'
+                        })
+                        setTimeout(() => setBannerMessage(initBanner), 5000)
+                    }
+                }).catch((error) => {
+                console.log(error.message)
+            })
+        }
+    }, []);
 
     const countFinishTime = () => {
         if (endTime && startTime) {
@@ -75,9 +126,10 @@ export const WinStatistic = ({
 
     return (
         <div className={isActiveCloseItem ? s.wrapper : s.wrapper_not_active}>
+            {bannerMessage.message &&
+                <Alert severity={bannerMessage.type} sx={{mb: 2}}>{t(bannerMessage.message)}</Alert>}
             <div className={s.winTable}>
                 <h2 className={s.title}>Game end statistics</h2>
-
                 <div className={s.text}>Text: <span className={s.phrase}>{text}</span></div>
                 <div className={s.statistics}>
                     <MyResponsivePie data={errorEndCorrectChars}/>

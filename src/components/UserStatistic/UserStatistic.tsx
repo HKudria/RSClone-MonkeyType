@@ -19,9 +19,9 @@ export const UserStatistic = ({gameInfo}: IUserStatisticProps) => {
             <TableRow key={`${gameInfo._id}key`}>
                 <TableCell align="center">{gameInfo.date}</TableCell>
                 <TableCell align="center">{gameInfo.text}</TableCell>
-                <TableCell align="center">{gameInfo.correct_input}</TableCell>
-                <TableCell align="center">{gameInfo.incorrect_input}</TableCell>
-                <TableCell align="center">{gameInfo.percent}</TableCell>
+                <TableCell align="center">{gameInfo.correctChar}</TableCell>
+                <TableCell align="center">{gameInfo.errorChar}</TableCell>
+                <TableCell align="center">{Math.trunc((gameInfo.correctChar / gameInfo.length) * 100)}</TableCell>
                 <TableCell align="center"><Button onClick={handleOpen}>{t('statistic.more')}</Button></TableCell>
             </TableRow>
             <Modal
@@ -30,9 +30,9 @@ export const UserStatistic = ({gameInfo}: IUserStatisticProps) => {
                 onClose={handleClose}
             >
                 <Box>
-                    <WinStatistic startTime={gameInfo.result_time} endTime={null} length={gameInfo.text.length}
-                                  errorChar={gameInfo.incorrect_input} correctChar={gameInfo.correct_input}
-                                  text={gameInfo.text} currIndex={1} time={gameInfo.timer} isUserPage={true} closeModal={handleClose}/>
+                    <WinStatistic startTime={gameInfo.startTime} endTime={null} length={gameInfo.length}
+                                  errorChar={gameInfo.errorChar} correctChar={gameInfo.correctChar}
+                                  text={gameInfo.text} currIndex={gameInfo.currIndex} time={gameInfo.time} isUserPage={true} closeModal={handleClose}/>
                 </Box>
             </Modal>
         </>
