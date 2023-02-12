@@ -1,4 +1,4 @@
-import { ChangeEvent, FC, useState } from 'react';
+import { ChangeEvent, FC, useEffect, useState } from 'react';
 import {useTranslation} from 'react-i18next';
 
 import s from './MainPage.module.css';

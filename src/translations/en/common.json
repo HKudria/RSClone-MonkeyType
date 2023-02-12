@@ -73,7 +73,8 @@
     "change": "change",
     "restart": "restart",
     "setYourself": "save",
-    "writeOwnText": "Write your own text"
+    "writeOwnText": "Write your own text",
+    "infoAboutStart": "To start the game, click on the words and wait until the green identifier light up"
 },
   "finishGameStatistics": {
     "title": "Game end statistics",

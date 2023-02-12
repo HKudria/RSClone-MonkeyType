@@ -7,16 +7,18 @@ import settings from '../../assets/image/settings.png';
 import addUser from '../../assets/image/add_user.png';
 
 import {useTranslation} from 'react-i18next';
+import { faker } from '@faker-js/faker';
 
 export const Header = () => {
     const {t, i18n} = useTranslation('common');
 
     const changeLanguage = (language: string) => {
         if (language === 'en' || language === 'ru') {
-            i18n.changeLanguage(language)
-            localStorage.setItem('lang', language)
+            i18n.changeLanguage(language);
+            faker.locale = language;
+            localStorage.setItem('lang', language);
         } else {
-            console.log('Wrong language')
+            console.log('Wrong language');
         }
     }
 
@@ -29,8 +31,9 @@ export const Header = () => {
                 <span className={s.title}>{t('title', {app:'MonkeyType'})}</span>
             </div>
             <div className={s.menuItems}>
-                <button onClick={() => changeLanguage('ru')}>ru</button>
-                <button onClick={() => changeLanguage('en')}>en</button>
+                <button className={s.btnChangeLang} onClick={() => changeLanguage('ru')}>ru</button>
+                <span className={s.separator}>/</span>
+                <button className={s.btnChangeLang} onClick={() => changeLanguage('en')}>en</button>
                 <NavLink to={'/'}>
                     <img className={s.keyboard} alt='keyboard' src={keyboard}></img>
                 </NavLink>

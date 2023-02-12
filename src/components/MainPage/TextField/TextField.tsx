@@ -1,6 +1,7 @@
 import { FC, useEffect, useState } from 'react';
 import useTypingGame from 'react-typing-game-hook';
 import { faker } from '@faker-js/faker';
+import {useTranslation} from 'react-i18next';
 
 import { WinStatistic } from './WinStatistic/WinStatistic';
 import s from './TextField.module.css';
@@ -21,10 +22,14 @@ export const TypingGameDemo:
      isActivePunctuation, selectTime, timeYourself,
      isInstallTimeYourself, wordsYourself, textYourself,
      isInstallTextYourself } ): JSX.Element => {
+
+  const {t} = useTranslation('common');
+
   const [text, setText] = useState('');
   const [isWin, setIsWin] = useState(false);
   const [counter, setCounter] = useState<number | null>();
   const [time, setTime] = useState<number | null>();
+  const [isStartGame, setIsStartGame] = useState(false);
   const {
     states: {
       charsState,
@@ -49,32 +54,41 @@ export const TypingGameDemo:
       insertTyping(key);
     }
   };
+  const handleStartGameClick = () => {
+    setIsStartGame(true);
+  }
 
   useEffect(() => {
     switch(selectTime) {
           case '15':
             setCounter(15);
             setTime(15);
+            setIsStartGame(false);
             break;
           case '30':
             setCounter(30);
             setTime(30);
+            setIsStartGame(false);
             break;
           case '60':
             setCounter(60);
             setTime(60);
+            setIsStartGame(false);
             break;
           case '120':
             setCounter(120);
             setTime(120);
+            setIsStartGame(false);
             break;
           case 'install_yourself_time':
             setCounter(+timeYourself);
             setTime(+timeYourself);
+            setIsStartGame(false);
             break;
           default:
             setCounter(null);
             setTime(null);
+            setIsStartGame(false);
         }
   }, [selectTime, timeYourself]);
 
@@ -89,18 +103,23 @@ export const TypingGameDemo:
     switch (amountOfWords) {
       case '10':
         setText(faker.lorem.words(10));
+        setIsStartGame(false);
         break;
       case '25':
         setText(faker.lorem.words(25));
+        setIsStartGame(false);
         break;
       case '50':
         setText(faker.lorem.words(50));
+        setIsStartGame(false);
         break;
       case 'install_yourself_words':
         setText(faker.lorem.words(+wordsYourself));
+        setIsStartGame(false);
         break;
       default:
         setText(faker.lorem.sentence());
+        setIsStartGame(false);
     }
   }, [amountOfWords, faker, wordsYourself]);
 
@@ -108,29 +127,37 @@ export const TypingGameDemo:
     switch (quote) {
       case 'short':
         setText(faker.lorem.sentence(5));
+        setIsStartGame(false);
         break;
       case 'medium':
         setText(faker.lorem.sentence(20));
+        setIsStartGame(false);
         break;
       case 'long':
         setText(faker.lorem.sentence(40));
+        setIsStartGame(false);
         break;  
       default:
         setText(faker.lorem.sentence(3));
+        setIsStartGame(false);
     }
   }, [quote, faker]);
 
   useEffect(() => {
     if (isActiveNumber && isActivePunctuation) {
       setText(`${faker.lorem.words(2)}. ${faker.lorem.words(2)}! ${faker.address.buildingNumber()} ${faker.lorem.words(1)}. ${faker.lorem.words(2)}, ${faker.address.buildingNumber()} '${faker.lorem.words(1)}'; ${faker.lorem.words(2)}?`);
+      setIsStartGame(false);
     } else if (isActiveNumber) {
       setText(faker.lorem.words(3) + ' ' + faker.address.buildingNumber()
        + ' ' + faker.lorem.words(2) + ' ' + faker.address.buildingNumber()
        + ' ' + faker.lorem.words(2));
+       setIsStartGame(false);
     } else if (isActivePunctuation) {
       setText(`${faker.lorem.words(2)}, ${faker.lorem.words(2)}: ${faker.lorem.words(1)}. ${faker.lorem.words(2)}! "${faker.lorem.words(1)}"; ${faker.lorem.words(2)}?`);
+      setIsStartGame(false);
     } else {
       setText(faker.lorem.sentence(4));
+      setIsStartGame(false);
     }
   }, [isActiveNumber, isActivePunctuation, faker]);
 
@@ -143,11 +170,27 @@ export const TypingGameDemo:
   useEffect(() => {
     if (isInstallTextYourself) {
       setText(textYourself);
+      setIsStartGame(false);
     }
   }, [isInstallTextYourself, textYourself]);
 
+  
+  useEffect(() => {
+    const handleEsc = (event: { keyCode: number; }) => {
+       if (event.keyCode === 27) {
+        setIsStartGame(false);
+      }
+    };
+    window.addEventListener('keydown', handleEsc);
+
+    return () => {
+      window.removeEventListener('keydown', handleEsc);
+    };
+  }, []);
+
   return (
     <div className={s.wrapper}>
+      {!isStartGame && <p className={s.startInfo}>{t('gameSettings.infoAboutStart')}</p>}
       <div className={s.timer}>{counter}</div>
       <div
         className={s.typingTest}
@@ -155,8 +198,10 @@ export const TypingGameDemo:
           handleKey(e.key);
           e.preventDefault();
         }}
+        onClick={handleStartGameClick}
         tabIndex={0}
       >
+        <div className={isStartGame ? s.startIndicatorActive : s.startIndicator}></div>
          {text.split('').map((char: string, index: number) => {
 
           const state = charsState[index];
