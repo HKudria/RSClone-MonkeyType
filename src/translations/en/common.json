@@ -37,6 +37,18 @@
   },
   "user": {
     "title": "User profile",
+    "welcome": "Welcome {{user}}",
     "register": "Register"
+  },
+  "statistic": {
+    "date": "Game date",
+    "text": "Text",
+    "correct": "Correct char",
+    "incorrect": "Incorrect char",
+    "percent": "Successfully percent",
+    "more": "More information"
+  },
+  "game": {
+    "saved": "Game was successfully saved"
   }
 }
