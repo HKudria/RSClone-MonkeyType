@@ -51,4 +51,42 @@
   "game": {
     "saved": "Game was successfully saved"
   }
+  ,
+  "gameSettings": {
+    "punctuation": "punctuation",
+    "numbers": "numbers",
+    "time": "timer off",
+    "time15": "15 s",
+    "time30": "30 s",
+    "time60": "60 s",
+    "time120": "120 s",
+    "timeInstallYourself": "install yourself",
+    "words": "words off",
+    "words10": "10 words",
+    "words25": "25 words",
+    "words50": "50 words",
+    "wordsInstallYourself": "install yourself",
+    "sentences": "sentence off",
+    "sentencesShort": "short sentence",
+    "sentencesMedium": "medium sentence",
+    "sentencesLong": "long sentence",
+    "change": "change",
+    "restart": "restart",
+    "setYourself": "save",
+    "writeOwnText": "Write your own text"
+},
+  "finishGameStatistics": {
+    "title": "Game end statistics",
+    "text": "Text: ",
+    "finishTime": "Finish time",
+    "sec": "sec",
+    "noTime": "Finish time: No",
+    "successRate": "Success rate: ",
+    "timer": "Timer: " ,
+    "noTimer": "Timer: off",
+    "unwrittenLetters": "Unwritten letters: ",
+    "tryAgain": "Try again",
+    "correctChars": "Correct chars",
+    "incorrectChars": "Incorrect chars"
+  }
 }

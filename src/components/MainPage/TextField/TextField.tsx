@@ -183,7 +183,7 @@ export const TypingGameDemo:
         currIndex={currIndex}
         time={time}
          /> }
-         <pre>
+         {/* <pre>
         {JSON.stringify(
           {
             // charsState,
@@ -199,10 +199,10 @@ export const TypingGameDemo:
           null,
           2
         )}
-      </pre>
-         <KeyboardHelper currChar={currChar}
+      </pre> */}
+         {/* <KeyboardHelper currChar={currChar}
          text={text}
-         currIndex={currIndex} />
+         currIndex={currIndex} /> */}
     </div>
   );
 };

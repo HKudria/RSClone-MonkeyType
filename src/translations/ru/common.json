@@ -43,12 +43,49 @@
   "statistic": {
     "date": "Дата игры",
     "text": "Текст",
-    "correct": "К-во коректных символов",
-    "incorrect": "К-во некоректных символов",
+    "correct": "К-во корректных символов",
+    "incorrect": "К-во некорректных символов",
     "percent": "Процент успеха",
     "more": "Больше информации"
   },
   "game": {
     "saved": "Игра успешно сохранена"
+  },
+  "gameSettings": {
+    "punctuation": "пунктуация",
+    "numbers": "числа",
+    "time": "таймер выкл",
+    "time15": "15 сек",
+    "time30": "30 сек",
+    "time60": "60 сек",
+    "time120": "120 сек",
+    "timeInstallYourself": "установи сам",
+    "words": "слова выкл",
+    "words10": "10 слов",
+    "words25": "25 слов",
+    "words50": "50 слов",
+    "wordsInstallYourself": "установи сам",
+    "sentences": "предложения выкл",
+    "sentencesShort": "короткое предложение",
+    "sentencesMedium": "среднее предложение",
+    "sentencesLong": "длинное предложение",
+    "change": "изменить",
+    "restart": "начать заново",
+    "setYourself": "сохранить",
+    "writeOwnText": "Введите свой текст"
+  },
+  "finishGameStatistics": {
+    "title": "Статистика об окончании игры",
+    "text": "Текст: ",
+    "finishTime": "Конец игры за ",
+    "sec": "сек",
+    "noTime": "Время окончания: -",
+    "successRate": "Процент успеха: ",
+    "timer": "Таймер: " ,
+    "noTimer": "Таймер: выкл",
+    "unwrittenLetters": "Ненаписанные буквы: ",
+    "tryAgain": "Попробовать снова",
+    "correctChars": "Правильные буквы",
+    "incorrectChars": "Неправильные буквы"
   }
 }

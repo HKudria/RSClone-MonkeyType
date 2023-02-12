@@ -1,8 +1,11 @@
 import { ResponsivePie } from '@nivo/pie'
 import { FC } from 'react';
+import {useTranslation} from 'react-i18next';
 import s from './Diagram.module.css';
 
 export const MyResponsivePie: FC< { data: Array<{ id: string; label: string; value: number | undefined; color: string; }>; }> = ({ data }) => {
+  const {t} = useTranslation('common');
+
   return (
     <div className={s.wrapper}>
         <ResponsivePie
@@ -59,13 +62,13 @@ export const MyResponsivePie: FC< { data: Array<{ id: string; label: string; val
           fill={[
               {
                   match: {
-                      id: 'Correct chars'
+                      id: `${t('finishGameStatistics.correctChars')}`
                   },
                   id: 'dots'
               },
               {
                   match: {
-                      id: 'Incorrect chars'
+                      id: `${t('finishGameStatistics.incorrectChars')}`
                   },
                   id: 'lines'
               },
@@ -79,7 +82,7 @@ export const MyResponsivePie: FC< { data: Array<{ id: string; label: string; val
                   translateX: 0,
                   translateY: 56,
                   itemsSpacing: 0,
-                  itemWidth: 100,
+                  itemWidth: 150,
                   itemHeight: 18,
                   itemTextColor: '#999',
                   itemDirection: 'left-to-right',

@@ -29,7 +29,7 @@ export const WinStatistic = ({
 
     const [isActiveCloseItem, setIsActiveCloseItem] = useState<boolean>(true);
     const [cookies, setCookie] = useCookies(['access_token']);
-    const initBanner: IBanner = {message: '', type: "success"}
+    const initBanner: IBanner = {message: '', type: 'success'}
     const [bannerMessage, setBannerMessage] = useState(initBanner);
     const {t} = useTranslation('common');
 
@@ -83,8 +83,8 @@ export const WinStatistic = ({
     const countFinishTime = () => {
         if (endTime && startTime) {
             const finishTime = ((endTime - startTime) / 1000).toFixed(2);
-            return `Finish time: ${finishTime} sec`;
-        } else return 'Finish time: No';
+            return `${t('finishGameStatistics.finishTime')} ${finishTime} ${t('finishGameStatistics.sec')}`;
+        } else return `${t('finishGameStatistics.noTime')}`;
     }
 
     const countPercentOfCorrectTyping = () => {
@@ -101,8 +101,8 @@ export const WinStatistic = ({
 
     const showTimer = () => {
         if (time) {
-            return `Timer: ${time} sec`;
-        } else return 'Timer: No timer';
+            return `${t('finishGameStatistics.timer')} ${time} ${t('finishGameStatistics.sec')}`;
+        } else return `${t('finishGameStatistics.noTimer')}`;
     }
 
     const playAgain = () => {
@@ -111,14 +111,14 @@ export const WinStatistic = ({
 
     const errorEndCorrectChars = [
         {
-            'id': 'Correct chars',
-            'label': 'Correct chars',
+            'id': `${t('finishGameStatistics.correctChars')}`,
+            'label': `${t('finishGameStatistics.correctChars')}`,
             'value': countCorrectChar(),
             'color': 'hsl(167, 70%, 50%)'
         },
         {
-            'id': 'Incorrect chars',
-            'label': 'Incorrect Chars',
+            'id': `${t('finishGameStatistics.incorrectChars')}`,
+            'label': `${t('finishGameStatistics.incorrectChars')}`,
             'value': errorChar,
             'color': 'hsl(205, 70%, 50%)'
         },
@@ -129,24 +129,24 @@ export const WinStatistic = ({
             {bannerMessage.message &&
                 <Alert severity={bannerMessage.type} sx={{mb: 2}}>{t(bannerMessage.message)}</Alert>}
             <div className={s.winTable}>
-                <h2 className={s.title}>Game end statistics</h2>
-                <div className={s.text}>Text: <span className={s.phrase}>{text}</span></div>
+                <h2 className={s.title}>{t('finishGameStatistics.title')}</h2>
+                <div className={s.text}>{t('finishGameStatistics.text')} <span className={s.phrase}>{text}</span></div>
                 <div className={s.statistics}>
                     <MyResponsivePie data={errorEndCorrectChars}/>
                     <div className={s.container}>
                         <div>
                             <div className={s.item}>{countFinishTime()}</div>
-                            <div className={s.item}>Success rate: {countPercentOfCorrectTyping()} %</div>
+                            <div className={s.item}>{t('finishGameStatistics.successRate')}{countPercentOfCorrectTyping()} %</div>
                         </div>
                         <div>
                             <div className={s.item}>{showTimer()}</div>
-                            <div className={s.item}>Unwritten letters: {countPercentOfUnwrittenText()} %</div>
+                            <div className={s.item}>{t('finishGameStatistics.unwrittenLetters')}{countPercentOfUnwrittenText()} %</div>
                         </div>
                     </div>
                 </div>
                 {!isUserPage ?
                     <button onClick={playAgain}
-                            className={s.btn}>Try again
+                            className={s.btn}>{t('finishGameStatistics.tryAgain')}
                     </button> : <button onClick={closeModal}
                                         className={s.btn}>CloseModal
                     </button>
