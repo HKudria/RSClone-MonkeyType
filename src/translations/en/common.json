@@ -46,7 +46,8 @@
     "correct": "Correct char",
     "incorrect": "Incorrect char",
     "percent": "Successfully percent",
-    "more": "More information"
+    "more": "More information",
+    "name": "Name"
   },
   "game": {
     "saved": "Game was successfully saved"

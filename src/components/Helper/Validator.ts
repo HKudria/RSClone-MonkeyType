@@ -23,3 +23,7 @@ export const validateField = (fieldName: string, value: string) => {
     }
     return message
 }
+
+export const shortText = (text: string, length: number) => {
+    return text.length >= length ? text.slice(0,length) + '...' : text
+}
