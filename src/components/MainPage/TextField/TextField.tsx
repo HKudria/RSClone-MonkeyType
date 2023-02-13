@@ -17,11 +17,12 @@ export const TypingGameDemo:
    isInstallTimeYourself: boolean;
    wordsYourself: string;
    textYourself: string;
-   isInstallTextYourself: boolean; }> = 
+   isInstallTextYourself: boolean;
+   isActiveHelp: boolean; }> = 
    ({ amountOfWords, quote, isActiveNumber,
      isActivePunctuation, selectTime, timeYourself,
      isInstallTimeYourself, wordsYourself, textYourself,
-     isInstallTextYourself } ): JSX.Element => {
+     isInstallTextYourself, isActiveHelp } ): JSX.Element => {
 
   const {t} = useTranslation('common');
 
@@ -245,9 +246,10 @@ export const TypingGameDemo:
           2
         )}
       </pre> */}
-         {/* <KeyboardHelper currChar={currChar}
+         {isActiveHelp && 
+         <KeyboardHelper
          text={text}
-         currIndex={currIndex} /> */}
+         currIndex={currIndex} />}
     </div>
   );
 };

@@ -1,72 +1,53 @@
-import { ChangeEvent, FC, SetStateAction, useEffect, useRef, useState } from 'react';
+import { FC, useEffect, useRef, useState } from 'react';
 import Keyboard from 'react-simple-keyboard';
 
 import 'react-simple-keyboard/build/css/index.css';
-import './Keyboard.module.css';
+import s from './Keyboard.module.css';
 
-export const KeyboardHelper: FC<{currChar: string; text: string; currIndex: number;}> = ({ currChar, text, currIndex }): JSX.Element => {
-  const [input, setInput] = useState('');
+export const KeyboardHelper: FC<{ text: string; currIndex: number;}> = ({  text, currIndex }): JSX.Element => {
   const [layout, setLayout] = useState('default');
   const keyboard = useRef();
-
- 
-  
-
-  const onChange = (input: SetStateAction<string>) => {
-    setInput(input);
-    console.log('Input changed', input);
-  };
-
-  const handleShift = () => {
-    const newLayoutName = layout === 'default' ? 'shift' : 'default';
-    setLayout(newLayoutName);
-  };
-
-  const onKeyPress = (button: string) => {
-    console.log('Button pressed', button);
-
-    /**
-     * If you want to handle the shift and caps lock buttons
-     */
-    if (button === '{shift}' || button === '{lock}') handleShift();
-  };
-
-  // const onChangeInput = (event: ChangeEvent<HTMLInputElement>) => {
-  //   const input = event.target.value;
-  //   setInput(input);
-  //   // if (keyboard.current) {
-  //   //   keyboard.current.setInput(input);
-  // };
 
   useEffect(() => {
     if (keyboard.current) {
       const allElements = keyboard.current.buttonElements;
-      // console.log(allElements);
-      // const currentLetter = allElements.filter((item: { currChar: string; }) => item === currChar);
       const arrayOfLetters = Object.keys(allElements);
       const currentLetter = arrayOfLetters.filter((item) => item === text[currIndex + 1]);
-      console.log(currentLetter);
-      // let test = allElements[currentLetter[0]];
-      allElements[currentLetter[0]] = ['div.hg-button.hg-standardBtn.active'];
-      // test = ['div.hg-button.hg-standardBtn.active'];
-      console.log(allElements);
+      const prevLetter = arrayOfLetters.filter((item) => item === text[currIndex]);
+      const letterAfterBackspace = arrayOfLetters.filter((item) => item === text[currIndex + 2]);
+
+      const curChar = currentLetter[0] ? currentLetter[0] : '{space}';
+      const prevChar = prevLetter[0] ? prevLetter[0] : '{space}';
+      const backspaceChar =letterAfterBackspace[0] ? letterAfterBackspace[0] : '{space}';
+
+      keyboard.current.removeButtonTheme(prevChar, 'hg-activeButton');
+      keyboard.current.addButtonTheme(curChar, 'hg-activeButton');
+
+      const handleBackspace = (event: { keyCode: number; }) => {
+        if (event.keyCode === 8) {
+          if (keyboard.current) {
+            keyboard.current.removeButtonTheme(backspaceChar, 'hg-activeButton');
+          }
+       }
+     };
+       window.addEventListener('keydown', handleBackspace);
+ 
+     return () => {
+       window.removeEventListener('keydown', handleBackspace);
+     };
     }
    
   }, [text, currIndex]);
 
   return (
-    <div className='App'>
-      {/* <input
-        value={input}
-        placeholder={'Tap on the virtual keyboard to start'}
-        onChange={onChangeInput}
-      /> */}
+    <div className={s.wrapper}>
+      <p className={s.keyboardWorks}>*keyboard works only in English language</p>
+      <div className='App'>
       <Keyboard
         keyboardRef={r => (keyboard.current = r)}
         layoutName={layout}
-        onChange={onChange}
-        onKeyPress={onKeyPress}
       />
+    </div>
     </div>
   );
 }

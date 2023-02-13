@@ -28,6 +28,8 @@ export const MainPage: FC = () => {
   const [isInstallTextYourself, setIsInstallTextYourself] = useState(false);
   const [textYourself, setTextYourself] = useState('Hey');
 
+  const [isActiveHelp, setIsActiveHelp] = useState(false);
+
 
   const changeTime = (event: ChangeEvent<HTMLSelectElement>) => {
     if (event.target.value === 'install_yourself_time') {
@@ -103,6 +105,23 @@ export const MainPage: FC = () => {
     setIsInstallTextYourself(true);
   }
 
+  const handleHelpBtn = () => {
+    setIsActiveHelp(current => !current)
+  }
+
+  useEffect(() => {
+    const handleEsc = (event: { keyCode: number; }) => {
+       if (event.keyCode === 27) {
+        setIsActiveHelp(false);
+      }
+    };
+    window.addEventListener('keydown', handleEsc);
+
+    return () => {
+      window.removeEventListener('keydown', handleEsc);
+    };
+  }, []);
+
   return (
     <div className={s.wrapper}>
       <div className={s.container}>
@@ -138,6 +157,7 @@ export const MainPage: FC = () => {
         </select>
         <div className={s.separator}></div>
         <div className={s.item} onClick={handleChangeTextBtn}>{t('gameSettings.change')}</div>
+        <div className={isActiveHelp ? s.item_active : s.item} onClick={handleHelpBtn}>{t('gameSettings.help')}</div>
       </div>
       {isInstallTimeYourself && 
       <div className={s.installTime}>
@@ -183,6 +203,7 @@ export const MainPage: FC = () => {
           wordsYourself={wordsYourself}
           textYourself={textYourself}
           isInstallTextYourself={isInstallTextYourself}
+          isActiveHelp={isActiveHelp}
           />
         <div className={s.restart}>
           <img src={ESC} alt='esc' className={s.esc}/>
