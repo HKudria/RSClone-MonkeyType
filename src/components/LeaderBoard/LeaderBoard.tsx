@@ -1,7 +1,7 @@
 import {useTranslation} from 'react-i18next';
 import {
     Alert,
-    Box,
+    Box, Button,
     CircularProgress,
     Paper,
     Table, TableBody,
@@ -16,6 +16,7 @@ import {UserStatistic} from '../UserStatistic/UserStatistic';
 import ReactPaginate from 'react-paginate';
 import s from './LeaderBoaerd.module.css'
 
+
 export const LeaderBoard = () => {
     const {t} = useTranslation('common');
     const [usersData, setUsersData] = useState<IUserData[]>([])
@@ -24,6 +25,11 @@ export const LeaderBoard = () => {
     const [itemOffset, setItemOffset] = useState(0);
     const [itemsPerPage, setItemsPerPage] = useState(8);
     const endOffset = itemOffset + itemsPerPage;
+    const [sortParam, setSortParam] = useState<'correctChar' | 'errorChar' | 'percent'>('percent');
+    const [orderParam, setOrderParam] = useState('ASC');
+    const [isCorrect, setIsCorrect] = useState(false)
+    const [isIncorrect, setIsIncorrect] = useState(false)
+    const [isPercent, setIsPercent] = useState(false)
 
 
     const handlePageClick = (event: { selected: number; }) => {
@@ -40,6 +46,22 @@ export const LeaderBoard = () => {
         }
     }
 
+    const onButtonClick = (type: string) => {
+        switch (type) {
+            case 'correct':
+                setSortParam('correctChar')
+                setIsCorrect(!isCorrect)
+                break;
+            case 'incorrect':
+                setSortParam('errorChar');
+                setIsIncorrect(!isIncorrect)
+                break;
+            case 'percent':
+                setSortParam('percent')
+                setIsPercent(!isPercent)
+                break;
+        }
+    }
 
     const parseUserData = () => {
         fetch(`${API_URL}/getLeaders`, {
@@ -57,14 +79,45 @@ export const LeaderBoard = () => {
                     setUsersData(data)
                 }
                 setPreloader(false)
-            }).catch((error) => {
+            }).then(()=>sortData()).catch((error) => {
             console.log(error.message)
         })
+
+    }
+
+    const sortData = () => {
+        if (orderParam === 'ASC') {
+            usersData.sort((user, userNext) => user[sortParam] - userNext[sortParam])
+        } else {
+            usersData.sort((user, userNext) => userNext[sortParam] - user[sortParam])
+        }
     }
 
     useEffect(() => {
         parseUserData()
     }, [])
+
+    useEffect(() => {
+        switch (sortParam) {
+            case 'correctChar':
+                if (isCorrect) {
+                    setOrderParam('DESC')
+                } else setOrderParam('ASC')
+                break;
+            case 'errorChar':
+                if (isIncorrect) {
+                    setOrderParam('DESC')
+                } else setOrderParam('ASC')
+                break;
+            case 'percent':
+                if (isPercent) {
+                    setOrderParam('DESC')
+                } else setOrderParam('ASC')
+                break;
+        }
+        sortData()
+    }, [sortParam, isCorrect, isIncorrect, isPercent]);
+
 
     const currentItems = usersData.slice(itemOffset, endOffset);
     const pageCount = Math.ceil(usersData.length / itemsPerPage);
@@ -110,17 +163,27 @@ export const LeaderBoard = () => {
                                         <TableCell align="center">#</TableCell>
                                         <TableCell align="center">{t('statistic.name')}</TableCell>
                                         <TableCell align="center">{t('statistic.text')}</TableCell>
-                                        <TableCell align="center">{t('statistic.correct')}</TableCell>
-                                        <TableCell align="center">{t('statistic.incorrect')}</TableCell>
-                                        <TableCell align="center">{t('statistic.percent')}</TableCell>
+                                        <TableCell align="center">
+                                            <Button variant="contained"
+                                                    onClick={() => onButtonClick('correct')}>{t('statistic.correct')}</Button>
+                                        </TableCell>
+                                        <TableCell align="center">
+                                            <Button variant="contained"
+                                                    onClick={() => onButtonClick('incorrect')}>{t('statistic.incorrect')}</Button>
+                                        </TableCell>
+                                        <TableCell align="center">
+                                            <Button variant="contained"
+                                                    onClick={() => onButtonClick('percent')}>{t('statistic.percent')}</Button>
+                                        </TableCell>
                                         <TableCell align="center">---</TableCell>
                                     </TableRow>
                                 </TableHead>
                                 <TableBody>
-                                    {currentItems.map((userData, index) => <UserStatistic gameInfo={userData}
-                                                                                          key={userData._id}
-                                                                                          isLeaders={true}
-                                                                                          index={itemOffset + index + 1}/>)}
+                                    {currentItems.map((userData, index) =>
+                                        <UserStatistic gameInfo={userData}
+                                                       key={userData._id}
+                                                       isLeaders={true}
+                                                       index={itemOffset + index + 1}/>)}
                                 </TableBody>
                             </Table>
                         </TableContainer>

@@ -9,5 +9,5 @@ export interface IRegisterFormErrors {
 
 export interface IBanner {
     message: string;
-    type: "success" | "error";
+    type: 'success' | 'error';
 }

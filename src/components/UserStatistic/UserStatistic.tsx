@@ -22,10 +22,11 @@ export const UserStatistic = ({gameInfo, isLeaders, index}: IUserStatisticProps)
             <TableRow key={`${gameInfo._id}key`}>
                 {index && <TableCell align="center">{index}</TableCell>}
                 <TableCell align="center">{!isLeaders ? gameInfo.date : gameInfo.fullName}</TableCell>
-                <TableCell align="left">{!isLeaders ? gameInfo.text : shortText(gameInfo.text,30)}</TableCell>
+                <TableCell title={gameInfo.text}
+                           align="left">{!isLeaders ? gameInfo.text : shortText(gameInfo.text, 30)}</TableCell>
                 <TableCell align="center">{gameInfo.correctChar}</TableCell>
                 <TableCell align="center">{gameInfo.errorChar}</TableCell>
-                <TableCell align="center">{Math.trunc((gameInfo.correctChar / gameInfo.length) * 100)}</TableCell>
+                <TableCell align="center">{gameInfo.percent}</TableCell>
                 <TableCell align="center"><Button onClick={handleOpen}>{t('statistic.more')}</Button></TableCell>
             </TableRow>
             <Modal
@@ -36,7 +37,9 @@ export const UserStatistic = ({gameInfo, isLeaders, index}: IUserStatisticProps)
                 <Box>
                     <WinStatistic startTime={gameInfo.startTime} endTime={null} length={gameInfo.length}
                                   errorChar={gameInfo.errorChar} correctChar={gameInfo.correctChar}
-                                  text={gameInfo.text} currIndex={gameInfo.currIndex} time={gameInfo.time} isUserPage={true} closeModal={handleClose}/>
+                                  percent={gameInfo.percent}
+                                  text={gameInfo.text} currIndex={gameInfo.currIndex} time={gameInfo.time}
+                                  isUserPage={true} closeModal={handleClose}/>
                 </Box>
             </Modal>
         </>

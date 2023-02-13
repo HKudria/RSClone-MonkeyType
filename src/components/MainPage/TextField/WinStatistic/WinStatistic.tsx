@@ -20,16 +20,17 @@ interface IWinStatisticProps {
     time: number | null | undefined;
     isUserPage?: boolean
     closeModal?: () => void
+    percent: number
 }
 
 export const WinStatistic = ({
                                  startTime, endTime, length, errorChar, correctChar,
-                                 text, currIndex, time, isUserPage, closeModal
+                                 text, currIndex, time, isUserPage, closeModal, percent
                              }: IWinStatisticProps) => {
 
-    const [isActiveCloseItem, setIsActiveCloseItem] = useState<boolean>(true);
+    const [isActiveCloseItem, setIsActiveCloseItem] = useState(true);
     const [cookies, setCookie] = useCookies(['access_token']);
-    const initBanner: IBanner = {message: '', type: "success"}
+    const initBanner: IBanner = {message: '', type: 'success'}
     const [bannerMessage, setBannerMessage] = useState(initBanner);
     const {t} = useTranslation('common');
 
@@ -50,6 +51,7 @@ export const WinStatistic = ({
                 time,
                 endTime,
                 startTime,
+                percent
             }
             fetch(`${API_URL}/saveUserResult`, {
                 method: 'POST',
@@ -85,12 +87,6 @@ export const WinStatistic = ({
             const finishTime = ((endTime - startTime) / 1000).toFixed(2);
             return `Finish time: ${finishTime} sec`;
         } else return 'Finish time: No';
-    }
-
-    const countPercentOfCorrectTyping = () => {
-        if (correctChar && length) {
-            return Math.trunc((correctChar / length) * 100);
-        } else return '0';
     }
 
     const countPercentOfUnwrittenText = () => {
@@ -136,7 +132,7 @@ export const WinStatistic = ({
                     <div className={s.container}>
                         <div>
                             <div className={s.item}>{countFinishTime()}</div>
-                            <div className={s.item}>Success rate: {countPercentOfCorrectTyping()} %</div>
+                            <div className={s.item}>Success rate: {percent} %</div>
                         </div>
                         <div>
                             <div className={s.item}>{showTimer()}</div>
