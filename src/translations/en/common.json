@@ -40,6 +40,11 @@
     "welcome": "Welcome {{user}}",
     "register": "Register"
   },
+  "pagination": {
+    "pages": "Results per page",
+    "next": "Next",
+    "previous": "Previous"
+  },
   "statistic": {
     "date": "Game date",
     "text": "Text",
@@ -47,7 +52,9 @@
     "incorrect": "Incorrect char",
     "percent": "Successfully percent",
     "more": "More information",
-    "name": "Name"
+    "name": "Name",
+    "pages": "Results per page",
+    "leader": "Leaders board"
   },
   "game": {
     "saved": "Game was successfully saved"
