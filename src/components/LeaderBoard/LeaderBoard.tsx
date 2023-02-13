@@ -76,10 +76,11 @@ export const LeaderBoard = () => {
                     setErrors(data.error)
                     setTimeout(() => setErrors(''), 10000)
                 } else {
+                    (data as IUserData[]).sort((user, userNext) => userNext[sortParam] - user[sortParam])
                     setUsersData(data)
                 }
                 setPreloader(false)
-            }).then(()=>sortData()).catch((error) => {
+            }).catch((error) => {
             console.log(error.message)
         })
 
