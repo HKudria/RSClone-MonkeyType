@@ -5,6 +5,7 @@ import keyboard from '../../assets/image/keyboard.png';
 import info from '../../assets/image/info.png';
 import settings from '../../assets/image/settings.png';
 import addUser from '../../assets/image/add_user.png';
+import leader from '../../assets/image/leaders.png';
 
 import {useTranslation} from 'react-i18next';
 
@@ -36,6 +37,9 @@ export const Header = () => {
                 </NavLink>
                 <NavLink to={'/InfoPage'}>
                     <img className={s.info} alt='info' src={info}></img>
+                </NavLink>
+                <NavLink to={'/Leaders'}>
+                    <img className={s.leader} alt='leader' src={leader}></img>
                 </NavLink>
                 <NavLink to={'/SettingsPage'}>
                     <img className={s.settings} alt='settings' src={settings}></img>
