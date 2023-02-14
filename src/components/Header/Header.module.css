@@ -15,10 +15,12 @@
 .keyboard,
 .info,
 .settings,
-.addUser {
+.addUser,
+.leader {
   width: 30px;
   height: 30px;
   filter: invert(93%) sepia(6%) saturate(1078%) hue-rotate(8deg) brightness(94%) contrast(89%);
+  margin-right: 5px;
 }
 
 .logo {

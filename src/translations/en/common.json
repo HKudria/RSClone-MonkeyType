@@ -40,13 +40,21 @@
     "welcome": "Welcome {{user}}",
     "register": "Register"
   },
+  "pagination": {
+    "pages": "Results per page",
+    "next": "Next",
+    "previous": "Previous"
+  },
   "statistic": {
     "date": "Game date",
     "text": "Text",
     "correct": "Correct char",
     "incorrect": "Incorrect char",
     "percent": "Successfully percent",
-    "more": "More information"
+    "more": "More information",
+    "name": "Name",
+    "pages": "Results per page",
+    "leader": "Leaders board"
   },
   "infoPage": {
     "created": "Created with love by wonderfull ",
@@ -58,5 +66,8 @@
     "results": "results screen",
     "resultsText": "After completing a test you will be able to see your accuracy, character stats, test length info and test info.",
     "collaborators": "collaborators"
+  },
+  "game": {
+    "saved": "Game was successfully saved"
   }
 }
