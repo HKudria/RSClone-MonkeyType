@@ -7,8 +7,8 @@ import { WinStatistic } from './WinStatistic/WinStatistic';
 import s from './TextField.module.css';
 import { KeyboardHelper } from './Keyboard/Keyboard';
 
-export const TypingGameDemo:
- FC<{ amountOfWords: string;
+interface ITypingGameDemoProps {
+   amountOfWords: string;
    quote: string;
    isActiveNumber: boolean; 
    isActivePunctuation: boolean;
@@ -18,11 +18,14 @@ export const TypingGameDemo:
    wordsYourself: string;
    textYourself: string;
    isInstallTextYourself: boolean;
-   isActiveHelp: boolean; }> = 
-   ({ amountOfWords, quote, isActiveNumber,
-     isActivePunctuation, selectTime, timeYourself,
-     isInstallTimeYourself, wordsYourself, textYourself,
-     isInstallTextYourself, isActiveHelp } ): JSX.Element => {
+   isActiveHelp: boolean;
+}
+
+export const TypingGameDemo = 
+                              ({ amountOfWords, quote, isActiveNumber,
+                                isActivePunctuation, selectTime, timeYourself,
+                                isInstallTimeYourself, wordsYourself, textYourself,
+                                isInstallTextYourself, isActiveHelp }: ITypingGameDemoProps ) => {
 
   const {t} = useTranslation('common');
 
