@@ -5,21 +5,29 @@ import { faker } from '@faker-js/faker';
 import { WinStatistic } from './WinStatistic/WinStatistic';
 import s from './TextField.module.css';
 
-export const TypingGameDemo:
- FC<{ amountOfWords: string;
-   quote: string;
-   isActiveNumber: boolean; 
-   isActivePunctuation: boolean;
-   selectTime: string;
-   timeYourself: string;
-   isInstallTimeYourself: boolean;
-   wordsYourself: string;
-   textYourself: string;
-   isInstallTextYourself: boolean; }> = 
-   ({ amountOfWords, quote, isActiveNumber,
-     isActivePunctuation, selectTime, timeYourself,
-     isInstallTimeYourself, wordsYourself, textYourself,
-     isInstallTextYourself } ): JSX.Element => {
+export const TypingGameDemo: FC<{
+  amountOfWords: string;
+  quote: string;
+  isActiveNumber: boolean;
+  isActivePunctuation: boolean;
+  selectTime: string;
+  timeYourself: string;
+  isInstallTimeYourself: boolean;
+  wordsYourself: string;
+  textYourself: string;
+  isInstallTextYourself: boolean;
+}> = ({
+  amountOfWords,
+  quote,
+  isActiveNumber,
+  isActivePunctuation,
+  selectTime,
+  timeYourself,
+  isInstallTimeYourself,
+  wordsYourself,
+  textYourself,
+  isInstallTextYourself,
+}): JSX.Element => {
   const [text, setText] = useState('');
   const [isWin, setIsWin] = useState(false);
   const [counter, setCounter] = useState<number | null>();
@@ -34,9 +42,9 @@ export const TypingGameDemo:
       errorChar,
       phase,
       startTime,
-      endTime
+      endTime,
     },
-    actions: { insertTyping, resetTyping, deleteTyping }
+    actions: { insertTyping, resetTyping, deleteTyping },
   } = useTypingGame(text);
 
   const handleKey = (key: string) => {
@@ -50,31 +58,31 @@ export const TypingGameDemo:
   };
 
   useEffect(() => {
-    switch(selectTime) {
-          case '15':
-            setCounter(15);
-            setTime(15);
-            break;
-          case '30':
-            setCounter(30);
-            setTime(30);
-            break;
-          case '60':
-            setCounter(60);
-            setTime(60);
-            break;
-          case '120':
-            setCounter(120);
-            setTime(120);
-            break;
-          case 'install_yourself_time':
-            setCounter(+timeYourself);
-            setTime(+timeYourself);
-            break;
-          default:
-            setCounter(null);
-            setTime(null);
-        }
+    switch (selectTime) {
+      case '15':
+        setCounter(15);
+        setTime(15);
+        break;
+      case '30':
+        setCounter(30);
+        setTime(30);
+        break;
+      case '60':
+        setCounter(60);
+        setTime(60);
+        break;
+      case '120':
+        setCounter(120);
+        setTime(120);
+        break;
+      case 'install_yourself_time':
+        setCounter(+timeYourself);
+        setTime(+timeYourself);
+        break;
+      default:
+        setCounter(null);
+        setTime(null);
+    }
   }, [selectTime, timeYourself]);
 
   useEffect(() => {
@@ -113,7 +121,7 @@ export const TypingGameDemo:
         break;
       case 'long':
         setText(faker.lorem.sentence(40));
-        break;  
+        break;
       default:
         setText(faker.lorem.sentence(3));
     }
@@ -121,13 +129,31 @@ export const TypingGameDemo:
 
   useEffect(() => {
     if (isActiveNumber && isActivePunctuation) {
-      setText(`${faker.lorem.words(2)}. ${faker.lorem.words(2)}! ${faker.address.buildingNumber()} ${faker.lorem.words(1)}. ${faker.lorem.words(2)}, ${faker.address.buildingNumber()} '${faker.lorem.words(1)}'; ${faker.lorem.words(2)}?`);
+      setText(
+        `${faker.lorem.words(2)}. ${faker.lorem.words(
+          2,
+        )}! ${faker.address.buildingNumber()} ${faker.lorem.words(1)}. ${faker.lorem.words(
+          2,
+        )}, ${faker.address.buildingNumber()} '${faker.lorem.words(1)}'; ${faker.lorem.words(2)}?`,
+      );
     } else if (isActiveNumber) {
-      setText(faker.lorem.words(3) + ' ' + faker.address.buildingNumber()
-       + ' ' + faker.lorem.words(2) + ' ' + faker.address.buildingNumber()
-       + ' ' + faker.lorem.words(2));
+      setText(
+        faker.lorem.words(3) +
+          ' ' +
+          faker.address.buildingNumber() +
+          ' ' +
+          faker.lorem.words(2) +
+          ' ' +
+          faker.address.buildingNumber() +
+          ' ' +
+          faker.lorem.words(2),
+      );
     } else if (isActivePunctuation) {
-      setText(`${faker.lorem.words(2)}, ${faker.lorem.words(2)}: ${faker.lorem.words(1)}. ${faker.lorem.words(2)}! "${faker.lorem.words(1)}"; ${faker.lorem.words(2)}?`);
+      setText(
+        `${faker.lorem.words(2)}, ${faker.lorem.words(2)}: ${faker.lorem.words(
+          1,
+        )}. ${faker.lorem.words(2)}! "${faker.lorem.words(1)}"; ${faker.lorem.words(2)}?`,
+      );
     } else {
       setText(faker.lorem.sentence(4));
     }
@@ -156,8 +182,7 @@ export const TypingGameDemo:
         }}
         tabIndex={0}
       >
-         {text.split('').map((char: string, index: number) => {
-
+        {text.split('').map((char: string, index: number) => {
           const state = charsState[index];
           const color = state === 0 ? '#444' : state === 1 ? '#dfd7af' : '#ca4754';
           return (
@@ -171,17 +196,18 @@ export const TypingGameDemo:
           );
         })}
       </div>
-      {((isWin || counter === 0) && !isInstallTimeYourself) &&
-       <WinStatistic
-        startTime={startTime}
-        endTime={endTime}
-        length={length}
-        errorChar={errorChar}
-        correctChar={correctChar}
-        text={text}
-        currIndex={currIndex}
-        time={time}
-         /> }
+      {(isWin || counter === 0) && !isInstallTimeYourself && (
+        <WinStatistic
+          startTime={startTime}
+          endTime={endTime}
+          length={length}
+          errorChar={errorChar}
+          correctChar={correctChar}
+          text={text}
+          currIndex={currIndex}
+          time={time}
+        />
+      )}
     </div>
   );
 };

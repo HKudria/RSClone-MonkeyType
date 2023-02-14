@@ -16,10 +16,7 @@ export const Footer = () => {
         <a href='https://github.com/AnyaPolischuk'>
           <img src={github} alt='github-logo' className={s.footerGithub} />
         </a>
-        <a
-          href='https://github.com/HKudria'
-          className=''
-        >
+        <a href='https://github.com/HKudria' className=''>
           <img src={github} alt='github-logo' className={s.footerGithub} />
         </a>
         <a href='https://github.com/Sekler09'>
