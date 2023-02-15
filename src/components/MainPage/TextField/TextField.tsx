@@ -1,9 +1,9 @@
-import { useEffect, useState } from 'react';
+import {useEffect, useState} from 'react';
 import useTypingGame from 'react-typing-game-hook';
-import { faker } from '@faker-js/faker';
+import {faker} from '@faker-js/faker';
 import {useTranslation} from 'react-i18next';
 
-import { WinStatistic } from './WinStatistic/WinStatistic';
+import {WinStatistic} from './WinStatistic/WinStatistic';
 import s from './TextField.module.css';
 import { KeyboardHelper } from './Keyboard/Keyboard';
 
@@ -96,12 +96,12 @@ export const TypingGameDemo =
         }
   }, [selectTime, timeYourself]);
 
-  useEffect(() => {
-    if (counter && startTime) {
-      const timer = setInterval(() => setCounter(counter - 1), 1000);
-      return () => clearInterval(timer);
-    }
-  }, [counter, startTime]);
+        useEffect(() => {
+            if (counter && startTime) {
+                const timer = setInterval(() => setCounter(counter - 1), 1000);
+                return () => clearInterval(timer);
+            }
+        }, [counter, startTime]);
 
   useEffect(() => {
     switch (amountOfWords) {
@@ -165,11 +165,11 @@ export const TypingGameDemo =
     }
   }, [isActiveNumber, isActivePunctuation, faker]);
 
-  useEffect(() => {
-    if (endTime) {
-      setIsWin(true);
-    }
-  }, [endTime]);
+        useEffect(() => {
+            if (endTime) {
+                setIsWin(true);
+            }
+        }, [endTime]);
 
   useEffect(() => {
     if (isInstallTextYourself) {
@@ -208,14 +208,14 @@ export const TypingGameDemo =
         <div className={isStartGame ? s.startIndicatorActive : s.startIndicator}></div>
          {text.split('').map((char: string, index: number) => {
 
-          const state = charsState[index];
-          const color = (state === 0 ? '#444' : state === 1 ? '#dfd7af' : '#ca4754');
-          return (
-            <span
-              key={`${char} + ${index}`}
-              style={{ color }}
-              className={currIndex + 1 === index ? 'curr-letter' : ''}
-            >
+                        const state = charsState[index];
+                        const color = state === 0 ? '#444' : state === 1 ? '#dfd7af' : '#ca4754';
+                        return (
+                            <span
+                                key={`${char} + ${index}`}
+                                style={{color}}
+                                className={currIndex + 1 === index ? 'curr-letter' : ''}
+                            >
               {char}
             </span>
           );

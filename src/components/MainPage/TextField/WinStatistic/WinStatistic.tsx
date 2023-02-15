@@ -20,14 +20,15 @@ interface IWinStatisticProps {
     time: number | null | undefined;
     isUserPage?: boolean
     closeModal?: () => void
+    percent: number
 }
 
 export const WinStatistic = ({
                                  startTime, endTime, length, errorChar, correctChar,
-                                 text, currIndex, time, isUserPage, closeModal
+                                 text, currIndex, time, isUserPage, closeModal, percent
                              }: IWinStatisticProps) => {
 
-    const [isActiveCloseItem, setIsActiveCloseItem] = useState<boolean>(true);
+    const [isActiveCloseItem, setIsActiveCloseItem] = useState(true);
     const [cookies, setCookie] = useCookies(['access_token']);
     const initBanner: IBanner = {message: '', type: 'success'}
     const [bannerMessage, setBannerMessage] = useState(initBanner);
@@ -50,6 +51,7 @@ export const WinStatistic = ({
                 time,
                 endTime,
                 startTime,
+                percent
             }
             fetch(`${API_URL}/saveUserResult`, {
                 method: 'POST',
@@ -83,8 +85,8 @@ export const WinStatistic = ({
     const countFinishTime = () => {
         if (endTime && startTime) {
             const finishTime = ((endTime - startTime) / 1000).toFixed(2);
-            return `${t('finishGameStatistics.finishTime')} ${finishTime} ${t('finishGameStatistics.sec')}`;
-        } else return `${t('finishGameStatistics.noTime')}`;
+            return `Finish time: ${finishTime} sec`;
+        } else return 'Finish time: No';
     }
 
     const countPercentOfCorrectTyping = () => {
