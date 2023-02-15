@@ -1,4 +1,4 @@
-import { FC, useEffect, useState } from 'react';
+import { useEffect, useState } from 'react';
 import useTypingGame from 'react-typing-game-hook';
 import { faker } from '@faker-js/faker';
 import {useTranslation} from 'react-i18next';
@@ -56,7 +56,7 @@ export const TypingGameDemo =
       deleteTyping(false);
     } else if (key.length === 1) {
       insertTyping(key);
-    }
+    } 
   };
   const handleStartGameClick = () => {
     setIsStartGame(true);
@@ -209,7 +209,7 @@ export const TypingGameDemo =
          {text.split('').map((char: string, index: number) => {
 
           const state = charsState[index];
-          const color = state === 0 ? '#444' : state === 1 ? '#dfd7af' : '#ca4754';
+          const color = (state === 0 ? '#444' : state === 1 ? '#dfd7af' : '#ca4754');
           return (
             <span
               key={`${char} + ${index}`}
@@ -220,6 +220,7 @@ export const TypingGameDemo =
             </span>
           );
         })}
+
       </div>
       {((isWin || counter === 0) && !isInstallTimeYourself) &&
        <WinStatistic
@@ -235,7 +236,9 @@ export const TypingGameDemo =
          {isActiveHelp && 
          <KeyboardHelper
          text={text}
-         currIndex={currIndex} />}
+         currIndex={currIndex}
+         insertTyping={insertTyping}
+          />}
     </div>
   );
 };

@@ -1,4 +1,4 @@
-import { FC, useEffect, useRef, useState } from 'react';
+import { useEffect, useRef, useState } from 'react';
 import Keyboard from 'react-simple-keyboard';
 import {useTranslation} from 'react-i18next';
 import layoutRu from 'simple-keyboard-layouts/build/layouts/russian';
@@ -8,12 +8,34 @@ import layoutEn from 'simple-keyboard-layouts/build/layouts/english';
 import 'react-simple-keyboard/build/css/index.css';
 import s from './Keyboard.module.css';
 
-export const KeyboardHelper: FC<{ text: string; currIndex: number;}> = ({  text, currIndex }): JSX.Element => {
+interface IKeyboardHelper {
+  text: string,
+  currIndex: number,
+  insertTyping: (char?: string | undefined) => void
+}
+
+export const KeyboardHelper = ({  text, currIndex, insertTyping }: IKeyboardHelper) => {
   const [layout, setLayout] = useState('default');
   const [layoutLang, setLayoutLang] = useState(layoutEn);
+  const [letter, setLetter] = useState('');
   const keyboard = useRef();
   const {t, i18n} = useTranslation('common');
  
+  const handleShift = () => {
+    const newLayoutName = layout === 'default' ? 'shift' : 'default';
+    setLayout(newLayoutName);
+  };
+  
+  const onKeyPress = (button: string) => {
+    if (button === '{shift}' || button === '{lock}') {
+      handleShift();
+    } 
+  }
+
+  const onChange = (letter: string) => {
+    setLetter(letter);
+    insertTyping(letter[letter.length - 1]);
+  }
 
   useEffect(() => {
     if (keyboard.current) {
@@ -48,7 +70,7 @@ export const KeyboardHelper: FC<{ text: string; currIndex: number;}> = ({  text,
      };
     }
    
-  }, [text, currIndex]);
+  }, [text, currIndex, letter]);
 
   useEffect(() => {
     if (t('gameSettings.keyboardLang') === 'ru') {
@@ -65,6 +87,8 @@ export const KeyboardHelper: FC<{ text: string; currIndex: number;}> = ({  text,
         keyboardRef={r => (keyboard.current = r)}
         layoutName={layout}
         layout={layoutLang.layout}
+        onKeyPress={onKeyPress}
+        onChange={onChange}
       />
     </div>
     </div>
