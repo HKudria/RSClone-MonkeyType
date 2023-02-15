@@ -133,7 +133,7 @@ export const LeaderBoard = () => {
                     display: 'flex',
                     justifyContent: 'center',
                     color: 'black',
-                    background: 'white',
+                    background: '#e3e3e3',
                     width: 'fit-content',
                     padding: 2,
                     flexDirection: 'column',
@@ -143,7 +143,7 @@ export const LeaderBoard = () => {
                         display: 'flex',
                         justifyContent: 'space-between',
                     }}>
-                        <h1>{t('statistic.leader')}</h1>
+                        <h1 className={s.title}>{t('statistic.leader')}</h1>
                         <TextField
                             id="filled-number"
                             label={t('pagination.pages')}
@@ -161,22 +161,22 @@ export const LeaderBoard = () => {
                             <Table sx={{minWidth: 700}} aria-label="customized table">
                                 <TableHead>
                                     <TableRow>
-                                        <TableCell align="center">#</TableCell>
-                                        <TableCell align="center">{t('statistic.name')}</TableCell>
-                                        <TableCell align="center">{t('statistic.text')}</TableCell>
-                                        <TableCell align="center">
-                                            <Button variant="contained"
-                                                    onClick={() => onButtonClick('correct')}>{t('statistic.correct')}</Button>
+                                        <TableCell sx={{backgroundColor: '#e3e3e3'}} align="center">#</TableCell>
+                                        <TableCell sx={{backgroundColor: '#e3e3e3'}} align="center">{t('statistic.name')}</TableCell>
+                                        <TableCell sx={{backgroundColor: '#e3e3e3'}} align="center">{t('statistic.text')}</TableCell>
+                                        <TableCell sx={{backgroundColor: '#e3e3e3'}} align="center">
+                                            <button className={s.button}
+                                                    onClick={() => onButtonClick('correct')}>{t('statistic.correct')}</button>
                                         </TableCell>
-                                        <TableCell align="center">
-                                            <Button variant="contained"
-                                                    onClick={() => onButtonClick('incorrect')}>{t('statistic.incorrect')}</Button>
+                                        <TableCell sx={{backgroundColor: '#e3e3e3'}} align="center">
+                                            <button className={s.button}
+                                                    onClick={() => onButtonClick('incorrect')}>{t('statistic.incorrect')}</button>
                                         </TableCell>
-                                        <TableCell align="center">
-                                            <Button variant="contained"
-                                                    onClick={() => onButtonClick('percent')}>{t('statistic.percent')}</Button>
+                                        <TableCell sx={{backgroundColor: '#e3e3e3'}} align="center">
+                                            <button className={s.button}
+                                                    onClick={() => onButtonClick('percent')}>{t('statistic.percent')}</button>
                                         </TableCell>
-                                        <TableCell align="center">---</TableCell>
+                                        <TableCell sx={{backgroundColor: '#e3e3e3'}} align="center">---</TableCell>
                                     </TableRow>
                                 </TableHead>
                                 <TableBody>

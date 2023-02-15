@@ -1,10 +1,12 @@
-import React, { useEffect, useState } from 'react';
-import { useTranslation } from 'react-i18next';
-import { Register } from './Register/Register';
-import { Login } from './Login/Login';
-import { Alert, Box, Button } from '@mui/material';
-import { useCookies } from 'react-cookie';
-import { UserProfile } from './UserProfile/UserProfile';
+import React, {useEffect, useState} from 'react';
+import {useTranslation} from 'react-i18next';
+import {Register} from './Register/Register';
+import {Login} from './Login/Login';
+import {Alert, Box, Button} from '@mui/material';
+import { useCookies } from 'react-cookie'
+import {UserProfile} from './UserProfile/UserProfile';
+import s from './SignInPage.module.css';
+
 
 export const SignInPage = () => {
   const HIDE_BANNER_TIME = 5000;
@@ -42,44 +44,26 @@ export const SignInPage = () => {
     setTimeout(() => setBannerMessage(''), HIDE_BANNER_TIME);
   };
 
-  return (
-    <Box
-      sx={{
-        display: 'flex',
-        justifyContent: 'center',
-        flexDirection: 'column',
-        alignItems: 'center',
-        mt: 3,
-        color: 'black',
-      }}
-    >
-      {bannerMessage && (
-        <Alert severity='success' sx={{ mb: 2 }}>
-          {t(bannerMessage)}
-        </Alert>
-      )}
-      <Box sx={{ display: 'flex', justifyContent: 'center', mb: 2 }}>
-        {isLoginSuccess ? (
-          <UserProfile toSingPage={successLogout} />
-        ) : isLogin ? (
-          <Login toSingPage={successLogin} />
-        ) : (
-          <Register toLogin={successRegister} />
-        )}
-      </Box>
-      <Box sx={{ display: 'flex', justifyContent: 'center' }}>
-        {isLoginSuccess ? (
-          ''
-        ) : isLogin ? (
-          <Button variant='contained' onClick={() => setIsLogin(false)}>
-            {t('button.register')}
-          </Button>
-        ) : (
-          <Button variant='contained' onClick={() => setIsLogin(true)}>
-            {t('button.login')}
-          </Button>
-        )}
-      </Box>
-    </Box>
-  );
-};
+    return (
+        <Box sx={{
+            display: 'flex',
+            justifyContent: 'center',
+            flexDirection: 'column',
+            alignItems: 'center',
+            mt: 3,
+            color: 'black'
+        }}>
+            {bannerMessage && <Alert severity="success" sx={{mb: 2}}>{t(bannerMessage)}</Alert>}
+            <Box sx={{display: 'flex', justifyContent: 'center', mb: 2}}>
+                { isLoginSuccess ? <UserProfile toSingPage={successLogout}/> :
+                    isLogin ? <Login toSingPage={successLogin}/> : <Register toLogin={successRegister}/>
+                } 
+            </Box>
+            <Box sx={{display: 'flex', justifyContent: 'center'}}>
+            {isLoginSuccess ? '' : isLogin ?
+                <button className={s.button} onClick={() => setIsLogin(false)}>{t('button.register')}</button>
+                : <button className={s.button} onClick={() => setIsLogin(true)}>{t('button.login')}</button>}
+            </Box>
+        </Box>
+    )
+}
