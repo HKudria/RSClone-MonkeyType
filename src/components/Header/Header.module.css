@@ -6,7 +6,7 @@
 }
 
 .menuItems {
-  width: 200px;
+  width: 300px;
   display: flex;
   align-items: center;
   justify-content: space-between;
@@ -36,4 +36,15 @@
   padding-left: 15px;
   cursor: pointer;
   min-width: 400px;
+}
+
+.btnChangeLang {
+  width: 30px;
+  border-radius: 5px;
+}
+
+.separator{
+  color: #dfd7af;
+  font-weight: 800;
+  font-size: 40px;
 }
