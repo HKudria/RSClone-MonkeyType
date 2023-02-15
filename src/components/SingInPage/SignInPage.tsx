@@ -9,40 +9,40 @@ import s from './SignInPage.module.css';
 
 
 export const SignInPage = () => {
-    const HIDE_BANNER_TIME = 5000;
-    const {t} = useTranslation('common');
-    const [isLogin, setIsLogin] = useState(true);
-    const [isLoginSuccess, setIsLoginSuccess] = useState(false);
-    const [bannerMessage, setBannerMessage] = useState('');
-    const [cookies, setCookie, removeCookie] = useCookies(['access_token']);
-    
-    useEffect(()=>{
-        if (localStorage.getItem('user') && cookies.access_token){
-            setIsLoginSuccess(true)
-        }
-    },[])
-    
-    const successRegister = () => {
-        setIsLogin(true);
-        setBannerMessage('register.success')
-        setTimeout(() => setBannerMessage(''), HIDE_BANNER_TIME)
-    }
+  const HIDE_BANNER_TIME = 5000;
+  const { t } = useTranslation('common');
+  const [isLogin, setIsLogin] = useState(true);
+  const [isLoginSuccess, setIsLoginSuccess] = useState(false);
+  const [bannerMessage, setBannerMessage] = useState('');
+  const [cookies, setCookie, removeCookie] = useCookies(['access_token']);
 
-    const successLogin = () => {
-        setIsLogin(true);
-        setIsLoginSuccess(true);
-        setBannerMessage('login.success')
-        setTimeout(() => setBannerMessage(''), HIDE_BANNER_TIME)
+  useEffect(() => {
+    if (localStorage.getItem('user') && cookies.access_token) {
+      setIsLoginSuccess(true);
     }
+  }, []);
 
-    const successLogout = () => {
-        removeCookie('access_token')
-        localStorage.removeItem('user')
-        setIsLogin(true);
-        setIsLoginSuccess(false);
-        setBannerMessage('logout.success')
-        setTimeout(() => setBannerMessage(''), HIDE_BANNER_TIME)
-    }
+  const successRegister = () => {
+    setIsLogin(true);
+    setBannerMessage('register.success');
+    setTimeout(() => setBannerMessage(''), HIDE_BANNER_TIME);
+  };
+
+  const successLogin = () => {
+    setIsLogin(true);
+    setIsLoginSuccess(true);
+    setBannerMessage('login.success');
+    setTimeout(() => setBannerMessage(''), HIDE_BANNER_TIME);
+  };
+
+  const successLogout = () => {
+    removeCookie('access_token');
+    localStorage.removeItem('user');
+    setIsLogin(true);
+    setIsLoginSuccess(false);
+    setBannerMessage('logout.success');
+    setTimeout(() => setBannerMessage(''), HIDE_BANNER_TIME);
+  };
 
     return (
         <Box sx={{

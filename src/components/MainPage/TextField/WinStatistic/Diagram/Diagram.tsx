@@ -1,4 +1,4 @@
-import { ResponsivePie } from '@nivo/pie'
+import { ResponsivePie } from '@nivo/pie';
 import { FC } from 'react';
 import {useTranslation} from 'react-i18next';
 import s from './Diagram.module.css';
@@ -100,7 +100,7 @@ export const MyResponsivePie: FC< { data: Array<{ id: string; label: string; val
               }
           ]}
       />
-  )
-      </div>
-  )
+      )
+    </div>
+  );
 };

@@ -28,69 +28,71 @@ export const Register = ({toLogin}: IRegisterProps) => {
         server: ''
     };
 
-    const [errors, setErrors] = useState<IRegisterFormErrors>(initialErrors);
+  const [errors, setErrors] = useState<IRegisterFormErrors>(initialErrors);
 
-    const onSubmit = () => {
-        const emailError = validateField('email', email)
-        const fNameError = validateField('fName', fName)
-        const lNameError = validateField('lName', lName)
-        const passwordError = validateField('password', password)
-        const repeatPasswordError = repeatPassword !== password || repeatPassword.length === 0 ? 'errors.passwordNoMuch' : ''
+  const onSubmit = () => {
+    const emailError = validateField('email', email);
+    const fNameError = validateField('fName', fName);
+    const lNameError = validateField('lName', lName);
+    const passwordError = validateField('password', password);
+    const repeatPasswordError =
+      repeatPassword !== password || repeatPassword.length === 0 ? 'errors.passwordNoMuch' : '';
 
-        setErrors({
-            email: emailError,
-            fName: fNameError,
-            lName: lNameError,
-            password: passwordError,
-            repeatPassword: repeatPasswordError,
-            server: ''
+    setErrors({
+      email: emailError,
+      fName: fNameError,
+      lName: lNameError,
+      password: passwordError,
+      repeatPassword: repeatPasswordError,
+      server: '',
+    });
+
+    if (!fNameError && !lNameError && !emailError && !passwordError && !repeatPasswordError) {
+      const user: IUser = {
+        first_name: fName,
+        last_name: lName,
+        password,
+        email,
+      };
+      fetch(`${API_URL}/register`, {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json',
+        },
+        body: JSON.stringify(user),
+      })
+        .then((response) => response.json())
+        .then((data) => {
+          if (data.error) {
+            setErrors({ ...errors, server: data.error });
+          } else {
+            toLogin();
+          }
         })
+        .catch((error) => {
+          console.log(error.message);
+        });
+    }
+  };
 
-        if (!fNameError && !lNameError && !emailError && !passwordError && !repeatPasswordError) {
-            const user: IUser = {
-                first_name: fName,
-                last_name: lName,
-                password,
-                email
-            }
-            fetch(`${API_URL}/register`, {
-                method: 'POST',
-                headers: {
-                    'Content-Type': 'application/json'
-                },
-                body: JSON.stringify(user)
-            })
-                .then(response => response.json())
-                .then((data) => {
-                    if (data.error) {
-                        setErrors({...errors, server: data.error})
-                    } else {
-                        toLogin()
-                    }
-                }).catch((error) => {
-                console.log(error.message)
-            })
-        }
-    }
+  const onChangeFName = (event: ChangeEvent<HTMLInputElement>) => {
+    setFName(event.target.value);
+  };
 
-    const onChangeFName = (event: ChangeEvent<HTMLInputElement>) => {
-        setFName(event.target.value)
-    }
+  const onChangeLName = (event: ChangeEvent<HTMLInputElement>) => {
+    setLName(event.target.value);
+  };
 
-    const onChangeLName = (event: ChangeEvent<HTMLInputElement>) => {
-        setLName(event.target.value)
-    }
+  const onChangeEmail = (event: ChangeEvent<HTMLInputElement>) => {
+    setEmail(event.target.value);
+  };
 
-    const onChangeEmail = (event: ChangeEvent<HTMLInputElement>) => {
-        setEmail(event.target.value)
-    }
-
-    const onChangePassword = (event: ChangeEvent<HTMLInputElement>) => {
-        setPassword(event.target.value)
-    }
-    const onChangeRepeatPassword = (event: ChangeEvent<HTMLInputElement>) => {
-        setRepeatPassword(event.target.value)
-    }
+  const onChangePassword = (event: ChangeEvent<HTMLInputElement>) => {
+    setPassword(event.target.value);
+  };
+  const onChangeRepeatPassword = (event: ChangeEvent<HTMLInputElement>) => {
+    setRepeatPassword(event.target.value);
+  };
 
     return (
         <div className={s.wrapper}>

@@ -9,68 +9,69 @@ import {useCookies} from 'react-cookie'
 import s from './Login.module.css';
 
 interface ILoginProps {
-    toSingPage: () => void
+  toSingPage: () => void;
 }
 
-export const Login = ({toSingPage}: ILoginProps) => {
-    const {t} = useTranslation('common');
-    const [cookies, setCookie] = useCookies(['access_token'])
-    const [email, setEmail] = useState('');
-    const [password, setPassword] = useState('');
-    const initialErrors = {
-        email: '',
-        password: '',
-        server: ''
-    }
+export const Login = ({ toSingPage }: ILoginProps) => {
+  const { t } = useTranslation('common');
+  const [cookies, setCookie] = useCookies(['access_token']);
+  const [email, setEmail] = useState('');
+  const [password, setPassword] = useState('');
+  const initialErrors = {
+    email: '',
+    password: '',
+    server: '',
+  };
 
-    const [errors, setErrors] = useState<IRegisterFormErrors>(initialErrors);
+  const [errors, setErrors] = useState<IRegisterFormErrors>(initialErrors);
 
-    const onSubmit = () => {
-        const emailError = validateField('email', email)
-        const passwordError = validateField('password', password)
+  const onSubmit = () => {
+    const emailError = validateField('email', email);
+    const passwordError = validateField('password', password);
 
-        setErrors({
-            email: emailError,
-            password: passwordError,
-            server: ''
+    setErrors({
+      email: emailError,
+      password: passwordError,
+      server: '',
+    });
+
+    if (!emailError && !passwordError) {
+      const login: ILogin = {
+        password,
+        email,
+      };
+      fetch(`${API_URL}/login`, {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json',
+        },
+        body: JSON.stringify(login),
+      })
+        .then((response) => response.json())
+        .then((data) => {
+          if (data.error) {
+            setErrors({ ...errors, server: data.error });
+          } else {
+            const expireDate = new Date();
+            expireDate.setHours(expireDate.getHours() + parseInt(data.expire));
+            setCookie('access_token', data.token, { path: '/', expires: expireDate });
+            localStorage.setItem('user', JSON.stringify(data));
+            toSingPage();
+          }
         })
-
-        if (!emailError && !passwordError) {
-            const login: ILogin = {
-                password,
-                email
-            }
-            fetch(`${API_URL}/login`, {
-                method: 'POST',
-                headers: {
-                    'Content-Type': 'application/json'
-                },
-                body: JSON.stringify(login)
-            })
-                .then(response => response.json())
-                .then((data) => {
-                    if (data.error) {
-                        setErrors({...errors, server: data.error})
-                    } else {
-                        const expireDate = new Date()
-                        expireDate.setHours(expireDate.getHours() + parseInt(data.expire))
-                        setCookie('access_token', data.token, {path: '/', expires: expireDate})
-                        localStorage.setItem('user', JSON.stringify(data))
-                        toSingPage()
-                    }
-                }).catch((error) => {
-                console.log(error.message)
-            })
-        }
+        .catch((error) => {
+          console.log(error.message);
+        });
     }
+  };
 
-    const onChangeEmail = (event: ChangeEvent<HTMLInputElement>) => {
-        setEmail(event.target.value)
-    }
+  const onChangeEmail = (event: ChangeEvent<HTMLInputElement>) => {
+    setEmail(event.target.value);
+  };
 
-    const onChangePassword = (event: ChangeEvent<HTMLInputElement>) => {
-        setPassword(event.target.value)
-    }
+  const onChangePassword = (event: ChangeEvent<HTMLInputElement>) => {
+    setPassword(event.target.value);
+  };
 
     return (
         <div className={s.wrapper}>

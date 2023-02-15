@@ -85,8 +85,8 @@ export const WinStatistic = ({
     const countFinishTime = () => {
         if (endTime && startTime) {
             const finishTime = ((endTime - startTime) / 1000).toFixed(2);
-            return `Finish time: ${finishTime} sec`;
-        } else return 'Finish time: No';
+            return `${t('finishGameStatistics.finishTime')}: ${finishTime} ${t('finishGameStatistics.sec')}`;
+        } else return `${t('finishGameStatistics.noTime')}`;
     }
 
     const countPercentOfCorrectTyping = () => {
@@ -107,9 +107,9 @@ export const WinStatistic = ({
         } else return `${t('finishGameStatistics.noTimer')}`;
     }
 
-    const playAgain = () => {
-        window.location.reload();
-    }
+  const playAgain = () => {
+    window.location.reload();
+  };
 
     const errorEndCorrectChars = [
         {

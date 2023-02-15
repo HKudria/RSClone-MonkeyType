@@ -5,7 +5,7 @@ export interface IUser {
     'password' : string;
 }
 
-export type ILogin = Pick<IUser, 'email' | 'password'>
+export type ILogin = Pick<IUser, 'email' | 'password'>;
 
 export interface IUserData{
     '_id': string;

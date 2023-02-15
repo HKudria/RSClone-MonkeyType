@@ -11,7 +11,7 @@ export const MainPage: FC = () => {
   const [selectAmountOfWords, setSelectAmountOfWords] = useState('');
   const [selectQuote, setSelectQuote] = useState('');
   const [selectTime, setSelectTime] = useState('');
-   
+
   const [time, setTime] = useState('No time');
   const [words, setAmountOfWords] = useState('Not words');
   const [quote, setQuote] = useState('Not quote');
@@ -55,51 +55,51 @@ export const MainPage: FC = () => {
     setAmountOfWords('no-words');
     setSelectQuote(event.target.value);
     setIsActivePunctuation(false);
-    setIsActiveNumber(false)
+    setIsActiveNumber(false);
   };
 
   const changeActiveClassPunctuation = () => {
-    setIsActivePunctuation(current => !current);
+    setIsActivePunctuation((current) => !current);
     if (isActivePunctuation) {
       setQuote('no-quote');
       setAmountOfWords('no-words');
     }
-  }
+  };
 
   const changeActiveClassNumber = () => {
-    setIsActiveNumber(current => !current);
+    setIsActiveNumber((current) => !current);
     if (isActiveNumber) {
       setQuote('no-quote');
       setAmountOfWords('no-words');
     }
-  }
+  };
 
   const handleInputTime = (event: ChangeEvent<HTMLInputElement>) => {
-    const currentSetTime = event.target.value.replace(/\D/g,'');
+    const currentSetTime = event.target.value.replace(/\D/g, '');
     setTimeYourself(currentSetTime);
-  }
+  };
 
   const handleInputWords = (event: ChangeEvent<HTMLInputElement>) => {
-    const currentSetWords = event.target.value.replace(/\D/g,'').substr(0,2);
+    const currentSetWords = event.target.value.replace(/\D/g, '').substr(0, 2);
     setWordsYourself(currentSetWords);
-  }
+  };
 
   const handleInputText = (event: ChangeEvent<HTMLTextAreaElement>) => {
     const currentSetText = event.target.value;
     setTextYourself(currentSetText);
-  }
+  };
 
   const handleBtnSetTime = () => {
     setIsInstallTimeYourself(false);
-  }
+  };
 
   const handleBtnSetWords = () => {
     setIsInstallWordsYourself(false);
-  }
+  };
 
   const handleBtnSetText = () => {
     setIsInstallTextYourself(false);
-  }
+  };
 
   const handleChangeTextBtn = () => {
     setIsInstallTextYourself(true);
@@ -159,7 +159,7 @@ export const MainPage: FC = () => {
         <div className={s.item} onClick={handleChangeTextBtn}>{t('gameSettings.change')}</div>
         <div className={isActiveHelp ? s.item_active : s.item} onClick={handleHelpBtn}>{t('gameSettings.help')}</div>
       </div>
-      {isInstallTimeYourself && 
+      {isInstallTimeYourself &&
       <div className={s.installTime}>
         <div className={s.installTimeInput}>
           <input type='text'
@@ -169,7 +169,7 @@ export const MainPage: FC = () => {
           <button onClick={handleBtnSetTime} className={s.btnTime}>{t('gameSettings.setYourself')}</button>
         </div>
       </div>}
-      {isInstallWordsYourself && 
+      {isInstallWordsYourself &&
       <div className={s.installWords}>
         <div className={s.installWordsInput}>
           <input type='text'
@@ -179,7 +179,7 @@ export const MainPage: FC = () => {
           <button onClick={handleBtnSetWords} className={s.btnWords}>{t('gameSettings.setYourself')}</button>
         </div>
       </div>}
-      {isInstallTextYourself && 
+      {isInstallTextYourself &&
       <div className={s.installText}>
         <div className={s.installTextInput}>
           <p className={s.textTitle}>{t('gameSettings.writeOwnText')}</p>
@@ -191,7 +191,7 @@ export const MainPage: FC = () => {
           <button onClick={handleBtnSetText} className={s.btnText}>{t('gameSettings.setYourself')}</button>
         </div>
       </div>}
-      
+
         <TypingGameDemo
           amountOfWords={selectAmountOfWords}
           quote={selectQuote}

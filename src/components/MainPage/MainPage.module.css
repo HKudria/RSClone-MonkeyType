@@ -21,7 +21,7 @@
 .time :checked,
 .words :checked,
 .quote :checked {
-  background-color: rgb(57, 55, 55) ;
+  background-color: rgb(57, 55, 55);
   color: #e3e3e3;
   cursor: pointer;
 }
@@ -42,7 +42,8 @@
   padding: 0 5px;
 }
 
-.item, select {
+.item,
+select {
   cursor: pointer;
 }
 
@@ -125,4 +126,3 @@
   justify-content: center;
   margin-top: 300px;
 }
-
