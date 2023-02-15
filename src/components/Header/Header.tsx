@@ -1,4 +1,4 @@
-import {NavLink} from 'react-router-dom';
+import { NavLink } from 'react-router-dom';
 import s from './Header.module.css';
 import logo from '../../assets/image/keyboard_logo.png';
 import keyboard from '../../assets/image/keyboard.png';
@@ -11,7 +11,7 @@ import {useTranslation} from 'react-i18next';
 import { faker } from '@faker-js/faker';
 
 export const Header = () => {
-    const {t, i18n} = useTranslation('common');
+  const { t, i18n } = useTranslation('common');
 
     const changeLanguage = (language: string) => {
         if (language === 'en' || language === 'ru') {
@@ -54,3 +54,4 @@ export const Header = () => {
         </header>
     )
 }
+

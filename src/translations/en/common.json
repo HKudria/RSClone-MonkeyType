@@ -16,7 +16,7 @@
     "success": "Account has been successfully registered"
   },
   "logout": {
-    "success" : "You has been successfully logout"
+    "success": "You has been successfully logout"
   },
   "errors": {
     "email": "Email isn't correct",
@@ -55,6 +55,17 @@
     "name": "Name",
     "pages": "Results per page",
     "leader": "Leaders board"
+  },
+  "infoPage": {
+    "created": "Created with love by wonderfull ",
+    "people": "people",
+    "RSS": "RSSchool final task.",
+    "launched": "Launched on 20th of February, 2023.",
+    "about": "about",
+    "aboutText": "Monkeytype is a minimalistic and customizable typing test. It features many test modes, an account system to save your typing speed history, and user-configurable features such as themes, sounds, a smooth caret, and more. Monkeytype attempts to emulate the experience of natural keyboard typing during a typing test, by unobtrusively presenting the text prompts and displaying typed characters in-place, providing straightforward, real-time feedback on typos, speed, and accuracy.",
+    "results": "results screen",
+    "resultsText": "After completing a test you will be able to see your accuracy, character stats, test length info and test info.",
+    "collaborators": "collaborators"
   },
   "game": {
     "saved": "Game was successfully saved"
