@@ -89,6 +89,12 @@ export const WinStatistic = ({
         } else return 'Finish time: No';
     }
 
+    const countPercentOfCorrectTyping = () => {
+        if (correctChar && length) {
+            return Math.trunc((correctChar / length) * 100);
+        } else return '0';
+    }
+
     const countPercentOfUnwrittenText = () => {
         if (currIndex && length) {
             return Math.trunc(((length - currIndex - 1) / length) * 100);
@@ -97,8 +103,8 @@ export const WinStatistic = ({
 
     const showTimer = () => {
         if (time) {
-            return `Timer: ${time} sec`;
-        } else return 'Timer: No timer';
+            return `${t('finishGameStatistics.timer')} ${time} ${t('finishGameStatistics.sec')}`;
+        } else return `${t('finishGameStatistics.noTimer')}`;
     }
 
     const playAgain = () => {
@@ -107,14 +113,14 @@ export const WinStatistic = ({
 
     const errorEndCorrectChars = [
         {
-            'id': 'Correct chars',
-            'label': 'Correct chars',
+            'id': `${t('finishGameStatistics.correctChars')}`,
+            'label': `${t('finishGameStatistics.correctChars')}`,
             'value': countCorrectChar(),
             'color': 'hsl(167, 70%, 50%)'
         },
         {
-            'id': 'Incorrect chars',
-            'label': 'Incorrect Chars',
+            'id': `${t('finishGameStatistics.incorrectChars')}`,
+            'label': `${t('finishGameStatistics.incorrectChars')}`,
             'value': errorChar,
             'color': 'hsl(205, 70%, 50%)'
         },
@@ -125,24 +131,24 @@ export const WinStatistic = ({
             {bannerMessage.message &&
                 <Alert severity={bannerMessage.type} sx={{mb: 2}}>{t(bannerMessage.message)}</Alert>}
             <div className={s.winTable}>
-                <h2 className={s.title}>Game end statistics</h2>
-                <div className={s.text}>Text: <span className={s.phrase}>{text}</span></div>
+                <h2 className={s.title}>{t('finishGameStatistics.title')}</h2>
+                <div className={s.text}>{t('finishGameStatistics.text')} <span className={s.phrase}>{text}</span></div>
                 <div className={s.statistics}>
                     <MyResponsivePie data={errorEndCorrectChars}/>
                     <div className={s.container}>
                         <div>
                             <div className={s.item}>{countFinishTime()}</div>
-                            <div className={s.item}>Success rate: {percent} %</div>
+                            <div className={s.item}>{t('finishGameStatistics.successRate')}{countPercentOfCorrectTyping()} %</div>
                         </div>
                         <div>
                             <div className={s.item}>{showTimer()}</div>
-                            <div className={s.item}>Unwritten letters: {countPercentOfUnwrittenText()} %</div>
+                            <div className={s.item}>{t('finishGameStatistics.unwrittenLetters')}{countPercentOfUnwrittenText()} %</div>
                         </div>
                     </div>
                 </div>
                 {!isUserPage ?
                     <button onClick={playAgain}
-                            className={s.btn}>Try again
+                            className={s.btn}>{t('finishGameStatistics.tryAgain')}
                     </button> : <button onClick={closeModal}
                                         className={s.btn}>CloseModal
                     </button>
