@@ -17,7 +17,7 @@ export const MyResponsivePie: FC<{
         borderWidth={1}
         borderColor={{
           from: 'color',
-          modifiers: [['darker', 0.2]],
+          modifiers: [['darker', 0.2]]
         }}
         arcLinkLabelsSkipAngle={10}
         arcLinkLabelsTextColor='#e3e3e3'
@@ -36,7 +36,7 @@ export const MyResponsivePie: FC<{
             color: 'rgba(255, 255, 255, 0.3)',
             size: 4,
             padding: 1,
-            stagger: true,
+            stagger: true
           },
           {
             id: 'lines',
@@ -45,7 +45,7 @@ export const MyResponsivePie: FC<{
             color: 'rgba(255, 255, 255, 0.3)',
             rotation: -45,
             lineWidth: 6,
-            spacing: 10,
+            spacing: 10
           },
         ]}
         fill={[
@@ -53,14 +53,14 @@ export const MyResponsivePie: FC<{
             match: {
               id: 'Correct chars',
             },
-            id: 'dots',
+            id: 'dots'
           },
           {
             match: {
               id: 'Incorrect chars',
             },
             id: 'lines',
-          },
+          }
         ]}
         legends={[
           {
@@ -81,11 +81,11 @@ export const MyResponsivePie: FC<{
               {
                 on: 'hover',
                 style: {
-                  itemTextColor: '#000',
-                },
-              },
-            ],
-          },
+                  itemTextColor: '#000'
+                }
+              }
+            ]
+          }
         ]}
       />
       )

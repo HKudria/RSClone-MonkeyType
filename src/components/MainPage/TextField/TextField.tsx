@@ -42,7 +42,6 @@ export const TypingGameDemo =
             actions: {insertTyping, resetTyping, deleteTyping}
         } = useTypingGame(text);
 
-
         const handleKey = (key: string) => {
             if (key === 'Escape') {
                 resetTyping();
@@ -190,5 +189,5 @@ export const TypingGameDemo =
             </div>
         );
     };
-    
+
 export default TypingGameDemo;

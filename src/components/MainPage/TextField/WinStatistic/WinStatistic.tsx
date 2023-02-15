@@ -94,7 +94,6 @@ export const WinStatistic = ({
             return Math.trunc(((length - currIndex - 1) / length) * 100);
         }
     }
-  };
 
   const showTimer = () => {
     if (time) {
@@ -148,20 +147,7 @@ export const WinStatistic = ({
                                         className={s.btn}>CloseModal
                     </button>
                 }
-                
             </div>
-          </div>
         </div>
-        {!isUserPage ? (
-          <button onClick={playAgain} className={s.btn}>
-            Try again
-          </button>
-        ) : (
-          <button onClick={closeModal} className={s.btn}>
-            CloseModal
-          </button>
-        )}
-      </div>
-    </div>
-  );
-};
+    )
+}
