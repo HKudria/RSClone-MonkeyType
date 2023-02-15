@@ -6,6 +6,7 @@ import {API_URL} from '../../Api/ApiHelper';
 import {ILogin} from '../../Api/Interface';
 import {Alert, Box, Button, FormControl, TextField} from '@mui/material';
 import {useCookies} from 'react-cookie'
+import s from './Login.module.css';
 
 interface ILoginProps {
     toSingPage: () => void
@@ -72,14 +73,16 @@ export const Login = ({toSingPage}: ILoginProps) => {
     }
 
     return (
-        <Box sx={{
+        <div className={s.wrapper}>
+            <Box sx={{
             display: 'flex',
             justifyContent: 'center',
             background: 'white',
             width: 'fit-content',
             padding: 2,
             flexDirection: 'column',
-            borderRadius: '25px'
+            borderRadius: '25px',
+            height: '300px'
         }}>
             <h1>{t('login.title')}</h1>
             <FormControl>
@@ -96,8 +99,9 @@ export const Login = ({toSingPage}: ILoginProps) => {
                            sx={{mb: 2, minWidth: '500px'}}
                 />
                 {errors.server && <Alert severity="error">{t(errors.server)}</Alert>}
-                <Button variant="contained" onClick={onSubmit}>{t('login.button')}</Button>
+                <button className={s.button} onClick={onSubmit}>{t('login.button')}</button>
             </FormControl>
         </Box>
+        </div>
     );
 }

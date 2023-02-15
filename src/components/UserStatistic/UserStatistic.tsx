@@ -4,6 +4,7 @@ import {IUserData} from '../Api/Interface';
 import {useState} from 'react';
 import {WinStatistic} from '../MainPage/TextField/WinStatistic/WinStatistic';
 import {shortText} from '../Helper/Validator';
+import s from './UserStatistic.module.css';
 
 interface IUserStatisticProps {
     gameInfo: IUserData
@@ -19,7 +20,7 @@ export const UserStatistic = ({gameInfo, isLeaders, index}: IUserStatisticProps)
 
     return (
         <>
-            <TableRow key={`${gameInfo._id}key`}>
+            <TableRow sx={{ backgroundColor: '#e3e3e3'}} key={`${gameInfo._id}key`}>
                 {index && <TableCell align="center">{index}</TableCell>}
                 <TableCell align="center">{!isLeaders ? gameInfo.date : gameInfo.fullName}</TableCell>
                 <TableCell title={gameInfo.text}

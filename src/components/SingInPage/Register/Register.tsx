@@ -5,9 +5,11 @@ import {validateField} from '../../Helper/Validator';
 import {API_URL} from '../../Api/ApiHelper';
 import {IUser} from '../../Api/Interface';
 import {Alert, Box, Button, FormControl, TextField} from '@mui/material';
+import s from './Register.module.css';
+import { createTheme, ThemeProvider } from '@mui/material/styles';
 
 interface IRegisterProps {
-    toLogin: () => void
+    toLogin: () => void,
 }
 
 export const Register = ({toLogin}: IRegisterProps) => {
@@ -24,7 +26,7 @@ export const Register = ({toLogin}: IRegisterProps) => {
         password: '',
         repeatPassword: '',
         server: ''
-    }
+    };
 
     const [errors, setErrors] = useState<IRegisterFormErrors>(initialErrors);
 
@@ -91,10 +93,11 @@ export const Register = ({toLogin}: IRegisterProps) => {
     }
 
     return (
-        <Box sx={{
+        <div className={s.wrapper}>
+            <Box sx={{
             display: 'flex',
             justifyContent: 'center',
-            background: 'white',
+            background: '#e3e3e3',
             width: 'fit-content',
             padding: 2,
             flexDirection: 'column',
@@ -130,11 +133,13 @@ export const Register = ({toLogin}: IRegisterProps) => {
                            error={!!errors.repeatPassword} variant="outlined" type="password"
                            name="fName" value={repeatPassword} onChange={onChangeRepeatPassword}
                            helperText={errors.repeatPassword ? t(errors.repeatPassword) : ''}
-                           sx={{mb: 2, minWidth: '500px'}}
+                           sx={{mb: 2, minWidth: '500px', color: '#e3e3e3'}}
                 />
                 {errors.server && <Alert severity="error">{t(errors.server)}</Alert>}
-                <Button variant="contained" onClick={onSubmit}>{t('register.button')}</Button>
+                <button className={s.button} onClick={onSubmit}>{t('register.button')}</button>
             </FormControl>
         </Box>
+        </div>
+        
     );
 }

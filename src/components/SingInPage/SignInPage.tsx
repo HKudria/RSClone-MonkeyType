@@ -5,6 +5,7 @@ import {Login} from './Login/Login';
 import {Alert, Box, Button} from '@mui/material';
 import { useCookies } from 'react-cookie'
 import {UserProfile} from './UserProfile/UserProfile';
+import s from './SignInPage.module.css';
 
 
 export const SignInPage = () => {
@@ -60,8 +61,8 @@ export const SignInPage = () => {
             </Box>
             <Box sx={{display: 'flex', justifyContent: 'center'}}>
             {isLoginSuccess ? '' : isLogin ?
-                <Button variant="contained" onClick={() => setIsLogin(false)}>{t('button.register')}</Button>
-                : <Button variant="contained" onClick={() => setIsLogin(true)}>{t('button.login')}</Button>}
+                <button className={s.button} onClick={() => setIsLogin(false)}>{t('button.register')}</button>
+                : <button className={s.button} onClick={() => setIsLogin(true)}>{t('button.login')}</button>}
             </Box>
         </Box>
     )

@@ -4,7 +4,7 @@ import {API_URL} from '../../Api/ApiHelper';
 import {
     Alert,
     Box,
-    Button, CircularProgress,
+    CircularProgress,
     Paper,
     Table,
     TableBody,
@@ -16,6 +16,7 @@ import {
 import {useCookies} from 'react-cookie'
 import {IUserData} from '../../Api/Interface';
 import {UserStatistic} from '../../UserStatistic/UserStatistic';
+import s from './UresProfile.module.css';
 
 interface IUserProfileProps {
     toSingPage: () => void
@@ -56,14 +57,14 @@ export const UserProfile = ({toSingPage}: IUserProfileProps) => {
     }, [])
 
     return (
-        <>
+        <div className={s.wrapper}>
             {preloader ?
                 <CircularProgress/>
                 :
                 <Box sx={{
                     display: 'flex',
                     justifyContent: 'center',
-                    background: 'white',
+                    background: '#e3e3e3',
                     width: 'fit-content',
                     padding: 2,
                     flexDirection: 'column',
@@ -72,10 +73,10 @@ export const UserProfile = ({toSingPage}: IUserProfileProps) => {
                     <h1>{t('user.title')}</h1>
                     <h3>{t('user.welcome', {user:`${user.fName} ${user.lName}`})}</h3>
                     {errors && <Alert severity="error">{t(errors)}</Alert>}
-                    <Button variant="contained" onClick={toSingPage}>{t('button.logout')}</Button>
+                    <button className={s.button} onClick={toSingPage}>{t('button.logout')}</button>
                     {usersData &&
                         <TableContainer component={Paper}>
-                            <Table sx={{minWidth: 700}} aria-label="customized table">
+                            <Table sx={{minWidth: 700, backgroundColor: '#e3e3e3'}} aria-label="customized table">
                                 <TableHead>
                                     <TableRow>
                                         <TableCell align="center">{t('statistic.date')}</TableCell>
@@ -93,6 +94,6 @@ export const UserProfile = ({toSingPage}: IUserProfileProps) => {
                         </TableContainer>
                     }
                 </Box>}
-        </>
+        </div>
     );
 }
