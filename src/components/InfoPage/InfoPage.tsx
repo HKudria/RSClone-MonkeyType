@@ -5,7 +5,7 @@ import herman from '../../assets/image/herman.jfif'
 import { useTranslation } from 'react-i18next';
 
 export const InfoPage = () => {
-  const { t, i18n} = useTranslation('common');
+  const { t } = useTranslation('common');
   return (
     <div>
       <div className={s.created}>
