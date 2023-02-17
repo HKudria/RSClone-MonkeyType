@@ -61,11 +61,11 @@
     "people": "people",
     "RSS": "RSSchool final task.",
     "launched": "Launched on 20th of February, 2023.",
-    "about": "about",
+    "about": "About",
     "aboutText": "Monkeytype is a minimalistic and customizable typing test. It features many test modes, an account system to save your typing speed history, and user-configurable features such as themes, sounds, a smooth caret, and more. Monkeytype attempts to emulate the experience of natural keyboard typing during a typing test, by unobtrusively presenting the text prompts and displaying typed characters in-place, providing straightforward, real-time feedback on typos, speed, and accuracy.",
-    "results": "results screen",
+    "results": "Results screen",
     "resultsText": "After completing a test you will be able to see your accuracy, character stats, test length info and test info.",
-    "collaborators": "collaborators"
+    "collaborators": "Collaborators"
   },
   "game": {
     "saved": "Game was successfully saved"
