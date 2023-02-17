@@ -110,5 +110,12 @@
     "tryAgain": "Try again",
     "correctChars": "Correct chars",
     "incorrectChars": "Incorrect chars"
+  },
+  "modalSave": {
+    "description": "Only users who login can save result to leader board.",
+    "question":  "Do you want to continue?",
+    "close": "Close modal",
+    "permanent": "Close for all time",
+    "login": "Go to login page"
   }
 }
