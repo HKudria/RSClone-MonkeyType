@@ -50,7 +50,7 @@
     justify-content: center;
     list-style-type: none;
     position: relative;
-    width: calc(100%- 120px);
+    width: calc(100% - 120px);
 }
 
 .pagination-page {
