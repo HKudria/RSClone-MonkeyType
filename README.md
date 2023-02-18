@@ -2,7 +2,11 @@
 
 ## Project description
 
-Monkeytype is a minimalistic and customizable typing test. It features many test modes, an account system to save your typing speed history, and user-configurable features such as themes, sounds, a smooth caret, and more. Monkeytype attempts to emulate the experience of natural keyboard typing during a typing test, by unobtrusively presenting the text prompts and displaying typed characters in-place, providing straightforward, real-time feedback on typos, speed, and accuracy.
+Monkeytype is a minimalistic and customizable typing test. It features many test modes, an account system to save your 
+typing speed history, and user-configurable features such as themes, sounds and more. 
+Monkeytype attempts to emulate the experience of natural keyboard typing during a typing test, by 
+unobtrusively presenting the text prompts and displaying typed characters in-place, providing straightforward, 
+real-time feedback on typos, speed, and accuracy.
 
 ## Project technology stack
 
