@@ -14,6 +14,10 @@ Monkeytype is a minimalistic and customizable typing test. It features many test
 - MaterialUi - for styling some components 
 - Simple keyboard - for showing helpfully keyboard
 - NodeJs - for [back-end](https://github.com/HKudria/rsCloneBackend)
+- Nivo/pie - for generating a pie chart from an array of data
+- React-typing-game-hook-v2 - for creating typing game functionality
+- Vite 
+
 
 ## Available Scripts
 
@@ -91,3 +95,15 @@ To learn more [i18next Documentation](https://github.com/i18next/i18next)
 ## react-cookie
 
 To learn more [react-cookie Documentation](https://github.com/reactivestack/cookies/tree/master/packages/react-cookie/)
+
+## Nivo/pie
+
+To learn more [nivo/pie Documentation](https://nivo.rocks/pie/)
+
+## React-typing-game-hook-v2
+
+To learn more [React-typing-game-hook-v2 Documentation](https://github.com/jokarz/react-typing-game-hook)
+
+## Vite
+
+To learn more [Vite Documentation](https://github.com/vitejs/vite)
