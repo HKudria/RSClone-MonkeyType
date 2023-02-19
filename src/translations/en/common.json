@@ -69,8 +69,7 @@
   },
   "game": {
     "saved": "Game was successfully saved"
-  }
-  ,
+  },
   "gameSettings": {
     "punctuation": "punctuation",
     "numbers": "numbers",
@@ -96,7 +95,7 @@
     "help": "help",
     "infoAboutStart": "To start the game, click on the words and wait until the green identifier light up",
     "keyboardLang": "en"
-},
+  },
   "finishGameStatistics": {
     "title": "Game end statistics",
     "text": "Text: ",
@@ -104,7 +103,7 @@
     "sec": "sec",
     "noTime": "Finish time: No",
     "successRate": "Success rate: ",
-    "timer": "Timer: " ,
+    "timer": "Timer: ",
     "noTimer": "Timer: off",
     "unwrittenLetters": "Unwritten letters: ",
     "tryAgain": "Try again",
@@ -113,9 +112,21 @@
   },
   "modalSave": {
     "description": "Only users who login can save result to leader board.",
-    "question":  "Do you want to continue?",
+    "question": "Do you want to continue?",
     "close": "Close modal",
     "permanent": "Close for all time",
     "login": "Go to login page"
+  }, 
+  "settings": {
+    "lang": "Language",
+    "ru": "Russian",
+    "en": "English",
+    "langDscr": "Switch the language of the interface",
+    "sound": "Sound",
+    "soundDscr": "Play a short sound when you press a key",
+    "noSound": "None",
+    "click": "Click", 
+    "keyboard": "Keyboard",
+    "font": "Font Family"
   }
 }

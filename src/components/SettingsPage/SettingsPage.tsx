@@ -29,38 +29,38 @@ export const SettingsPage = () => {
     <div className={s.settingsPage}>
       <ul className={s.settingsList}>
         <li className={s.settingsListItem}>
-          <h2>Language</h2>
+          <h2>{t('settings.lang')}</h2>
           <div>
-            <p>Switch the language of the interface</p>
+            <p>{t('settings.langDscr')}</p>
             <div className={s.variantsList}>
               <button onClick={() => switchLanguage('ru')}
                 style={{fontFamily: state.font}}
-                className={state.lang === 'ru' ? s.activeVar : undefined}>Russian</button>
+                className={state.lang === 'ru' ? s.activeVar : undefined}>{t('settings.ru')}</button>
               <button onClick={() => switchLanguage('en')}
                 style={{fontFamily: state.font}}
-                className={state.lang === 'en' ? s.activeVar : undefined}>English</button>
+                className={state.lang === 'en' ? s.activeVar : undefined}>{t('settings.en')}</button>
             </div>
           </div>
         </li>
         <li className={s.settingsListItem}>
-          <h2>Sound</h2>
+          <h2>{t('settings.sound')}</h2>
           <div>
-            <p>Play a short sound when you press a key</p>
+            <p>{t('settings.soundDscr')}</p>
             <div className={s.variantsList}>
               <button onClick={() => switchSound('none')}
                 style={{fontFamily: state.font}}
-                className={state.sound === 'none' ? s.activeVar : undefined}>None</button>
+                className={state.sound === 'none' ? s.activeVar : undefined}>{t('settings.noSound')}</button>
               <button onClick={() => switchSound('click')}
                 style={{fontFamily: state.font}}
-                className={state.sound === 'click' ? s.activeVar : undefined}>Click</button>
+                className={state.sound === 'click' ? s.activeVar : undefined}>{t('settings.click')}</button>
               <button onClick={() => switchSound('keyboard')}
                 style={{fontFamily: state.font}}
-                className={state.sound === 'keyboard' ? s.activeVar : undefined}>Keyboard</button>
+                className={state.sound === 'keyboard' ? s.activeVar : undefined}>{t('settings.keyboard')}</button>
             </div>
           </div>
         </li>
         <li className={s.settingsListItem}>
-          <h2>Font Family</h2>
+          <h2>{t('settings.font')}</h2>
           <div>
             <div className={s.languageList}>
               <button onClick={() => switchFont('Chilanka')}
