@@ -8,6 +8,9 @@ import s from './TextField.module.css';
 import {KeyboardHelper} from './Keyboard/Keyboard';
 import {useCookies} from 'react-cookie';
 import {SaveModal} from './SaveModal/SaveModal';
+import { playSound } from '../../../store/settingsSlice';
+import { useSelector } from 'react-redux';
+import { RootState } from '../../../store/store';
 
 interface ITypingGameDemoProps {
     amountOfWords: string;
@@ -32,7 +35,7 @@ export const TypingGameDemo =
      }: ITypingGameDemoProps) => {
 
         const {t} = useTranslation('common');
-
+        const sound = useSelector((state: RootState) => state.settings.sound)
         const [text, setText] = useState('');
         const [isWin, setIsWin] = useState(false);
         const [counter, setCounter] = useState<number | null>();
@@ -229,6 +232,7 @@ export const TypingGameDemo =
                         className={s.typingTest}
                         onKeyDown={(e) => {
                             handleKey(e.key);
+                            playSound(sound)
                             e.preventDefault();
                         }}
                         onClick={handleStartGameClick}
@@ -245,8 +249,8 @@ export const TypingGameDemo =
                                     style={{color}}
                                     className={currIndex + 1 === index ? 'curr-letter' : ''}
                                 >
-              {char}
-            </span>
+                                    {char}
+                                </span>
                             );
                         })}
 

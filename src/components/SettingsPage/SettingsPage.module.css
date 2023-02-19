@@ -1,0 +1,38 @@
+.settingsPage{
+  color: #dfd7af;
+}
+
+.settingsList{
+  list-style-type: none;
+}
+
+.settingsListItem > div{
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+}
+
+.variantsList{
+  display: flex;
+  gap: 30px;
+}
+
+.variantsList  > button{
+  width: 150px;
+  border-radius: 20px;
+  padding: 10px 20px;
+  background-color: #2b2b2b;
+  color: white;
+  border: none;
+}
+
+.variantsList > button:hover{
+  background-color: white;
+  color: #2b2b2b;
+  cursor: pointer;
+}
+
+button.activeVar{
+  background-color: #dfd7af;
+  color: rgb(14, 8, 28)
+}
