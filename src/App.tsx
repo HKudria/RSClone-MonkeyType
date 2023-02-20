@@ -10,17 +10,19 @@ import WebFont from 'webfontloader';
 import { useEffect } from 'react';
 import { useSelector } from 'react-redux';
 import { RootState } from './store/store';
+import { font } from './store/settingsSlice';
+
+export const fonts: font[] = ['Droid Sans', 'Chilanka', 'Atkinson Hyperligible', 'Courier', 'Montserrat', 'Ubuntu', 'Inconsolata']
 
 const App = () => {
   const font = useSelector((state: RootState) => state.settings.font)
   useEffect(() => {
     WebFont.load({
       google: {
-        families: ['Droid Sans', 'Chilanka', 'Atkinson Hyperligible', 'Comfortoa', 'Courier', 'Montserrat', 'Ubuntu', 'Inconsolata']
+        families: fonts
       }
     });
   }, []);
-  console.log('render')
   return (
     <BrowserRouter>
       <div style={{ fontFamily: font }}>
