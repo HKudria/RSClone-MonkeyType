@@ -2,8 +2,7 @@ import { faker } from '@faker-js/faker';
 import React from 'react';
 import { useTranslation } from 'react-i18next';
 import { useDispatch, useSelector } from 'react-redux';
-import { fonts } from '../../App';
-import { changeFont, changeLanguage, changeSound, font, language, playSound, settingsState, sound } from '../../store/settingsSlice';
+import { changeFont, changeLanguage, changeSound, fonts, language, playSound, settingsState, sound } from '../../store/settingsSlice';
 import { RootState } from '../../store/store';
 import s from './SettingsPage.module.css';
 
@@ -22,9 +21,12 @@ export const SettingsPage = () => {
     playSound(sound)
   }
 
-  const switchFont = (font: font) => {
+  const switchFont = (font: fonts) => {
     dispatch(changeFont(font))
   }
+
+  
+  console.log(Object.values(fonts).filter((font) => isNaN(Number(font))))
 
   return (
     <div className={s.settingsPage}>
@@ -64,7 +66,7 @@ export const SettingsPage = () => {
           <h2>{t('settings.font')}</h2>
           <div>
             <div className={s.languageList}>
-              {fonts.map(font =>
+              {Object.values(fonts).filter((font) => isNaN(Number(font))).map(font =>
                 <button
                   onClick={() => switchFont(font)}
                   key={font}

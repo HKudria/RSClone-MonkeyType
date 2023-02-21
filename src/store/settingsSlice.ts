@@ -5,12 +5,21 @@ import keyboard from '../assets/sounds/keyboard.mp3'
 
 export type language = 'ru' | 'en'
 export type sound = 'none' | 'click' | 'keyboard'
-export type font = 'Droid Sans' | 'Chilanka' | 'Atkinson Hyperligible' | 'Helvetica' | 'Courier' | 'Montserrat' | 'Ubuntu' | 'Inconsolata'
+export enum fonts{
+  DroidSans = 'Droid Sans',
+  Chilanka ='Chilanka', 
+  Atkinson = 'Atkinson Hyperligible',
+  Helvetica =  'Helvetica',
+  Courier = 'Courier',
+  Montserrat =  'Montserrat',
+  Ubuntu = 'Ubuntu',
+  Inconsolata = 'Inconsolata'
+}
 
 export interface settingsState {
   lang: language,
   sound: sound,
-  font: font
+  font: fonts
 } 
 
 const initialState: settingsState = JSON.parse(localStorage.getItem('config') as string) ?? {
@@ -52,7 +61,7 @@ export const settingsSlice = createSlice({
       state.sound = action.payload
       setStateToLocalStorage(state)
     },
-    changeFont(state: settingsState, action: {payload: font, type: string}){
+    changeFont(state: settingsState, action: {payload: fonts, type: string}){
       state.font = action.payload
       setStateToLocalStorage(state)
     }
