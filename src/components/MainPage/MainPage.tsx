@@ -4,9 +4,13 @@ import {useTranslation} from 'react-i18next';
 import s from './MainPage.module.css';
 import TypingGameDemo from './TextField/TextField';
 import ESC from '../../assets/image/esc.png';
+import { useSelector } from 'react-redux';
+import { RootState } from '../../store/store';
 
 export const MainPage: FC = () => {
   const {t} = useTranslation('common');
+
+  const font = useSelector((state: RootState) => state.settings.font)
 
   const [selectAmountOfWords, setSelectAmountOfWords] = useState('');
   const [selectQuote, setSelectQuote] = useState('');
@@ -134,7 +138,7 @@ export const MainPage: FC = () => {
          onClick={changeActiveClassNumber}
          >{t('gameSettings.numbers')}</div>
          <div className={s.separator}></div>
-        <select value={time} onChange={changeTime} className={s.time}>
+        <select value={time} onChange={changeTime} className={s.time} style={{fontFamily: font}}>
           <option value="no-time">{t('gameSettings.time')}</option>
           <option value="15">{t('gameSettings.time15')}</option>
           <option value="30">{t('gameSettings.time30')}</option>
@@ -142,14 +146,14 @@ export const MainPage: FC = () => {
           <option value="120">{t('gameSettings.time120')}</option>
           <option value="install_yourself_time">{t('gameSettings.timeInstallYourself')}</option>
         </select>
-        <select value={words} onChange={changeAmountOfWords} className={s.words}>
+        <select value={words} onChange={changeAmountOfWords} className={s.words} style={{fontFamily: font}}>
           <option value="no-words">{t('gameSettings.words')}</option>
           <option value="10">{t('gameSettings.words10')}</option>
           <option value="25">{t('gameSettings.words25')}</option>
           <option value="50">{t('gameSettings.words50')}</option>
           <option value="install_yourself_words">{t('gameSettings.wordsInstallYourself')}</option>
         </select>
-        <select value={quote} onChange={changeQuote} className={s.quote}>
+        <select value={quote} onChange={changeQuote} className={s.quote} style={{fontFamily: font}}>
           <option value="no-quote">{t('gameSettings.sentences')}</option>
           <option value="short">{t('gameSettings.sentencesShort')}</option>
           <option value="medium">{t('gameSettings.sentencesMedium')}</option>

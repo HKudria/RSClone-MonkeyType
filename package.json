@@ -10,7 +10,6 @@
     "@mui/material": "^5.11.0",
     "@nivo/core": "^0.80.0",
     "@nivo/pie": "^0.80.0",
-    "@reduxjs/toolkit": "^1.9.0-rc.1",
     "@testing-library/jest-dom": "^5.16.5",
     "@testing-library/react": "^13.4.0",
     "@testing-library/user-event": "^14.4.3",
@@ -62,6 +61,8 @@
   },
   "devDependencies": {
     "@faker-js/faker": "^7.6.0",
+    "@reduxjs/toolkit": "^1.9.2",
+    "@types/webfontloader": "^1.6.35",
     "@typescript-eslint/eslint-plugin": "^5.46.1",
     "@vitejs/plugin-react": "^3.1.0",
     "eslint": "^8.29.0",
@@ -77,6 +78,7 @@
     "vite": "^4.1.1",
     "vite-plugin-svgr": "^2.4.0",
     "vite-tsconfig-paths": "^4.0.5",
-    "vitest": "^0.28.4"
+    "vitest": "^0.28.4",
+    "webfontloader": "^1.6.28"
   }
 }

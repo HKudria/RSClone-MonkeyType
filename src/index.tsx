@@ -8,14 +8,12 @@ import commonEn from './translations/en/common.json';
 import App from './App';
 
 import './index.css';
-import '@fontsource/roboto/300.css';
-import '@fontsource/roboto/400.css';
-import '@fontsource/roboto/500.css';
-import '@fontsource/roboto/700.css';
+import { store } from './store/store'
+import { Provider } from 'react-redux';
 
 i18next.init({
   interpolation: { escapeValue: false },
-  lng: localStorage.getItem('lang') ?? 'en',
+  lng: JSON.parse(localStorage.getItem('config') as string)?.lang ?? 'en',
   resources: {
     en: {
       common: commonEn,
@@ -31,6 +29,8 @@ const root = createRoot(container);
 
 root.render(
   <I18nextProvider i18n={i18next}>
-    <App />
+    <Provider store={store}>
+      <App />
+    </Provider>
   </I18nextProvider>
 );
