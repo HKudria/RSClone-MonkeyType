@@ -25,9 +25,6 @@ export const SettingsPage = () => {
     dispatch(changeFont(font))
   }
 
-  
-  console.log(Object.values(fonts).filter((font) => isNaN(Number(font))))
-
   return (
     <div className={s.settingsPage}>
       <ul className={s.settingsList}>
